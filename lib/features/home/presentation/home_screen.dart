@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:sadec_smart_city/features/home/logic/home_cubit.dart';
 import 'package:sadec_smart_city/features/home/presentation/widgets/citizen_services_grid.dart';
 import 'package:sadec_smart_city/features/home/presentation/widgets/slider_banner.dart';
+import 'package:sadec_smart_city/shared/widgets/smart_theme_switch.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -36,7 +37,7 @@ class _HomeView extends StatelessWidget {
         actions: const [
           Padding(
             padding: EdgeInsets.only(right: 16),
-            child: Icon(Icons.search, size: 28),
+            child: SmartThemeSwitch(),
           ),
         ],
         leading: const Padding(

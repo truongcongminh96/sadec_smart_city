@@ -7,9 +7,9 @@ class SliderBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<String> images = [
-      'https://cdn.dribbble.com/userupload/13740270/file/original-cf61d97d48aff752c4fb6eba190aa94e.jpg?resize=752x&vertical=center',
-      'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/8aa7e828-cef5-4a91-9367-644f1554aa22/ddp1fwo-af3c630b-b850-48ea-8ac5-50f5d708ffd0.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzhhYTdlODI4LWNlZjUtNGE5MS05MzY3LTY0NGYxNTU0YWEyMlwvZGRwMWZ3by1hZjNjNjMwYi1iODUwLTQ4ZWEtOGFjNS01MGY1ZDcwOGZmZDAucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.R3BOs4CiXaX4K2M3oEY24WAeITA9AUsPSiVA7VC8rrQ',
-      'https://i.pinimg.com/736x/4e/db/0f/4edb0f445a57f0760c25e3adba8c70df.jpg',
+      'https://scontent.iocvnpt.com/resources/portal/Images/DTP/superadminportal.dtp/trangchu/portal/slider/cd12_262_cong_vien_sadec_thuy_ban_636932879.jpg',
+      'https://scontent.iocvnpt.com/resources/portal/Images/DTP/dtblieu/anh_bia/thap_muoi_que_huong_513958281.jpg',
+      'https://scontent.iocvnpt.com/resources/portal/Images/DTP/superadminportal.dtp/trangchu/portal/slider/cd09_112_ngay_hoi_xuan_3_532255319.jpg',
     ];
 
     return Container(
