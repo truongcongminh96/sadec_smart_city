@@ -25,6 +25,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.2"
+  carousel_slider:
+    dependency: "direct main"
+    description:
+      name: carousel_slider
+      sha256: "7b006ec356205054af5beaef62e2221160ea36b90fb70a35e4deacd49d0349ae"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.0.0"
   characters:
     dependency: transitive
     description:
@@ -176,6 +184,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.2.1"
+  hive_ce:
+    dependency: transitive
+    description:
+      name: hive_ce
+      sha256: ac66daee46ad46486a1ed12cf91e9d7479c875fb46889be8d2c96b557406647f
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.10.1"
   http:
     dependency: transitive
     description:
@@ -192,6 +208,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.2"
+  hydrated_bloc:
+    dependency: "direct main"
+    description:
+      name: hydrated_bloc
+      sha256: "5401d5df7d800256a0d1ae16b5d8b518dd44c50d412fe96c6a96d8a4ea85a938"
+      url: "https://pub.dev"
+    source: hosted
+    version: "10.0.0"
   leak_tracker:
     dependency: transitive
     description:
@@ -273,7 +297,7 @@ packages:
     source: hosted
     version: "1.9.1"
   path_provider:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: path_provider
       sha256: "50c5dd5b6e1aaf6fb3a78b33f6aa3afca52bf903a8a5298f53101fdaee55bbcd"
@@ -437,6 +461,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.4.1"
+  synchronized:
+    dependency: transitive
+    description:
+      name: synchronized
+      sha256: "0669c70faae6270521ee4f05bffd2919892d42d1276e6c495be80174b6bc0ef6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.3.1"
   term_glyph:
     dependency: transitive
     description:

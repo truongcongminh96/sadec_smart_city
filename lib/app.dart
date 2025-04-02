@@ -1,17 +1,29 @@
 import 'package:flutter/material.dart';
-import 'core/theme/app_theme.dart';
-import 'core/router/app_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sadec_smart_city/core/theme/app_theme.dart';
+import 'package:sadec_smart_city/core/theme/theme_cubit.dart';
+import 'package:sadec_smart_city/core/router/app_router.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      title: 'Sa Đéc Smart',
-      theme: AppTheme.light,
-      routerConfig: AppRouter.router,
-      debugShowCheckedModeBanner: false,
+    final systemBrightness = WidgetsBinding.instance.platformDispatcher.platformBrightness;
+
+    return BlocProvider(
+      create: (_) => ThemeCubit(systemBrightness: systemBrightness),
+      child: BlocBuilder<ThemeCubit, ThemeMode>(
+        builder: (context, themeMode) {
+          return MaterialApp.router(
+            theme: AppTheme.light,
+            darkTheme: AppTheme.dark,
+            themeMode: themeMode,
+            routerConfig: AppRouter.router,
+            debugShowCheckedModeBanner: false,
+          );
+        },
+      ),
     );
   }
 }
