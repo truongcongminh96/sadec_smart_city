@@ -3,20 +3,30 @@ import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   static ThemeData get light => ThemeData(
-    primarySwatch: Colors.green,
-    scaffoldBackgroundColor: Colors.white,
+    scaffoldBackgroundColor: const Color(0xFFF8F8F8),
+    // light background
     textTheme: GoogleFonts.soraTextTheme(),
-    appBarTheme: AppBarTheme(
-      backgroundColor: Colors.green.shade600,
-      foregroundColor: Colors.white,
+    appBarTheme: const AppBarTheme(
+      backgroundColor: Colors.white,
+      foregroundColor: Colors.black,
       elevation: 0,
+      centerTitle: true,
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.green,
+        backgroundColor: const Color(0xFF1D1D1D),
         foregroundColor: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         textStyle: const TextStyle(fontWeight: FontWeight.bold),
       ),
+    ),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      backgroundColor: Colors.white,
+      selectedItemColor: Colors.black,
+      unselectedItemColor: Colors.grey,
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
+      elevation: 10,
     ),
   );
 }
