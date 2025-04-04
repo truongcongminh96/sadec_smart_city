@@ -9,8 +9,9 @@ class BankLoading extends BankState {}
 
 class BankLoaded extends BankState {
   final List<BankModel> banks;
+  final List<BankModel> allBanks;
 
-  BankLoaded(this.banks);
+  BankLoaded({required this.banks, required this.allBanks});
 }
 
 class BankError extends BankState {

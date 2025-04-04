@@ -3,30 +3,57 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sadec_smart_city/core/di/injector.dart';
 import 'package:sadec_smart_city/features/essential_services/categories/bank/data/repositories/bank_repository.dart';
 import 'package:sadec_smart_city/features/essential_services/categories/bank/logic/bank_cubit.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:sadec_smart_city/features/essential_services/categories/bank/presentation/widgets/bank_card.dart';
+import 'package:sadec_smart_city/features/essential_services/categories/bank/presentation/widgets/bank_search_bar.dart';
 
-class BankScreen extends StatelessWidget {
+class BankScreen extends StatefulWidget {
   const BankScreen({super.key});
 
   @override
+  State<BankScreen> createState() => _BankScreenState();
+}
+
+class _BankScreenState extends State<BankScreen> {
+  final TextEditingController _searchController = TextEditingController();
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Danh sách Ngân hàng')),
-      body: BlocProvider(
-        create: (_) => BankCubit(getIt<BankRepository>())..loadBanks(),
-        child: BlocBuilder<BankCubit, BankState>(
+    return BlocProvider(
+      create: (_) => BankCubit(getIt<BankRepository>())..loadBanks(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Danh sách Ngân hàng'),
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(56),
+            child: Builder(
+              builder:
+                  (context) => BankSearchBar(controller: _searchController),
+            ),
+          ),
+        ),
+        body: BlocBuilder<BankCubit, BankState>(
           builder: (context, state) {
             if (state is BankLoading) {
               return const Center(child: CircularProgressIndicator());
             }
             if (state is BankLoaded) {
               final banks = state.banks;
+              if (banks.isEmpty) {
+                return const Center(
+                  child: Text("Không tìm thấy ngân hàng nào."),
+                );
+              }
               return ListView.builder(
                 padding: const EdgeInsets.all(12),
                 itemCount: banks.length,
                 itemBuilder: (context, index) {
-                  final bank = banks[index];
-                  return _BankCard(bank: bank);
+                  return BankCard(bank: banks[index]);
                 },
               );
             }
@@ -36,129 +63,6 @@ class BankScreen extends StatelessWidget {
             return const SizedBox();
           },
         ),
-      ),
-    );
-  }
-}
-
-class _BankCard extends StatelessWidget {
-  final dynamic bank;
-
-  const _BankCard({required this.bank});
-
-  @override
-  Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
-    final gradientColors =
-        isDark
-            ? [
-              const Color(0xFF0F2027),
-              const Color(0xFF203A43),
-              const Color(0xFF2C5364),
-            ]
-            : [const Color(0xFF8E2DE2), const Color(0xFF4A00E0)];
-
-    final Color textColor = Colors.white;
-    final Color subTextColor = Colors.white70;
-    final Color accentColor = isDark ? Colors.amber : Colors.greenAccent;
-
-    return Container(
-      margin: const EdgeInsets.only(bottom: 16),
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: gradientColors,
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: const [
-          BoxShadow(color: Colors.black26, blurRadius: 6, offset: Offset(0, 4)),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Flexible(
-                child: Text(
-                  bank.ten ?? "Tên ngân hàng",
-                  style: TextStyle(
-                    color: textColor,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
-                ),
-              ),
-              Icon(Icons.wifi, color: subTextColor, size: 20),
-            ],
-          ),
-          const SizedBox(height: 16),
-          Row(
-            children: [
-              Icon(Icons.call, size: 32, color: accentColor),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Text(
-                  bank.sdt ?? "Không có số",
-                  style: TextStyle(
-                    letterSpacing: 2,
-                    fontSize: 18,
-                    color: textColor,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          Text(
-            bank.diaChi ?? "Địa chỉ đang cập nhật",
-            style: TextStyle(color: subTextColor, fontSize: 13),
-          ),
-          const SizedBox(height: 15),
-          if (bank.gpsLat != null && bank.gpsLong != null)
-            if (bank.gpsLat != null && bank.gpsLong != null)
-              Align(
-                alignment: Alignment.centerRight,
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: accentColor, width: 1.5),
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  child: TextButton.icon(
-                    onPressed: () async {
-                      final url = Uri.parse(
-                        'https://www.google.com/maps/search/?api=1&query=${bank.gpsLat},${bank.gpsLong}',
-                      );
-                      if (await canLaunchUrl(url)) {
-                        await launchUrl(url);
-                      }
-                    },
-                    icon: Icon(Icons.location_pin, color: accentColor),
-                    label: Text(
-                      "Bản đồ",
-                      style: TextStyle(
-                        color: accentColor,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    style: TextButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 6,
-                      ),
-                      foregroundColor: accentColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-        ],
       ),
     );
   }

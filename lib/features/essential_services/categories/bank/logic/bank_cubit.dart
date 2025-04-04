@@ -14,9 +14,25 @@ class BankCubit extends Cubit<BankState> {
     emit(BankLoading());
     try {
       final banks = await repository.fetchBanks(102);
-      emit(BankLoaded(banks));
+      emit(BankLoaded(banks: banks, allBanks: banks));
     } catch (e) {
       emit(BankError(e.toString()));
+    }
+  }
+
+  void searchBanks(String query) {
+    if (state is BankLoaded) {
+      final allBanks = (state as BankLoaded).allBanks;
+      final filteredBanks =
+          allBanks.where((bank) {
+            final lowerQuery = query.toLowerCase();
+            return bank.ten.toLowerCase().contains(lowerQuery) ||
+                (bank.diaChi != null &&
+                    bank.diaChi!.toLowerCase().contains(lowerQuery)) ||
+                (bank.sdt != null && bank.sdt!.contains(lowerQuery));
+          }).toList();
+
+      emit(BankLoaded(banks: filteredBanks, allBanks: allBanks));
     }
   }
 }

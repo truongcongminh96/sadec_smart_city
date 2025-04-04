@@ -19,7 +19,6 @@ class OtherServiceGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<EssentialServicesCubit>();
     final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
     final width = MediaQuery.of(context).size.width;
 
     return Column(
