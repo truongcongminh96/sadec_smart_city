@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sadec_smart_city/features/essential_services/data/models/essential_service_model.dart';
+import 'package:sadec_smart_city/shared/utils/navigation_helper.dart';
 
 class EssentialServiceGrid extends StatelessWidget {
   final List<EssentialServiceModel> services;
@@ -42,7 +43,11 @@ class EssentialServiceGrid extends StatelessWidget {
 
         return _AnimatedCard(
           child: InkWell(
-            onTap: () => onTap?.call(item),
+            onTap:
+                () => NavigationHelper.handleMenuTapWithMenuAppId(
+                  context,
+                  item.menuAppId,
+                ),
             borderRadius: BorderRadius.circular(16),
             child: Container(
               decoration: BoxDecoration(

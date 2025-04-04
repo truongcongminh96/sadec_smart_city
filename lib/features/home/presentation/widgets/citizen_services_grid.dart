@@ -40,7 +40,11 @@ class CitizenServicesGrid extends StatelessWidget {
         itemBuilder: (context, index) {
           final item = items[index];
           return GestureDetector(
-            onTap: () => NavigationHelper.handleMenuTap(context, item),
+            onTap:
+                () => NavigationHelper.handleMenuTapWithMenuAppId(
+                  context,
+                  item.menuAppId,
+                ),
             child: Column(
               children: [
                 Container(

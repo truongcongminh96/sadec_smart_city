@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sadec_smart_city/core/router/app_routes.dart';
-import 'package:sadec_smart_city/features/home/data/models/menu_item_model.dart';
 
 class NavigationHelper {
-  static void handleMenuTap(BuildContext context, MenuItemModel item) {
-    switch (item.menuAppId) {
+  static void handleMenuTapWithMenuAppId(BuildContext context, int menuAppId) {
+    switch (menuAppId) {
       case 3:
         context.pushNamed(AppRoutes.essentialServicesName);
         break;
@@ -15,14 +14,13 @@ class NavigationHelper {
       case 5:
         // context.pushNamed('education');
         break;
+      case 102:
+        context.pushNamed(AppRoutes.bankName);
+        break;
       default:
-        if (item.link.isNotEmpty) {
-          context.push('/webview?url=${Uri.encodeComponent(item.link)}');
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Tính năng đang được cập nhật')),
-          );
-        }
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Tính năng đang được cập nhật')),
+        );
     }
   }
 }
