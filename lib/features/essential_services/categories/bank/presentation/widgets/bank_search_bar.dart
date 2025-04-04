@@ -10,20 +10,24 @@ class BankSearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      child: TextField(
-        controller: controller,
-        decoration: InputDecoration(
-          hintText: 'Tìm kiếm (tên, địa chỉ, sđt)...',
-          prefixIcon: const Icon(Icons.search),
-          filled: true,
-          fillColor: Colors.white,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-            borderSide: BorderSide.none,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      child: Material(
+        elevation: 3,
+        borderRadius: BorderRadius.circular(20),
+        child: TextField(
+          decoration: InputDecoration(
+            hintText: 'Tìm kiếm (tên, địa chỉ, sđt)...',
+            prefixIcon: const Icon(Icons.search),
+            filled: true,
+            fillColor: Colors.white,
+            contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
+              borderSide: BorderSide.none,
+            ),
           ),
+          onChanged: (text) => context.read<BankCubit>().searchBanks(text),
         ),
-        onChanged: (text) => context.read<BankCubit>().searchBanks(text),
       ),
     );
   }

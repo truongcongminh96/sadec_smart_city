@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:sadec_smart_city/core/di/injector.dart';
 import 'package:sadec_smart_city/features/essential_services/categories/bank/data/repositories/bank_repository.dart';
 import 'package:sadec_smart_city/features/essential_services/categories/bank/logic/bank_cubit.dart';
@@ -49,12 +50,22 @@ class _BankScreenState extends State<BankScreen> {
                   child: Text("Không tìm thấy ngân hàng nào."),
                 );
               }
-              return ListView.builder(
-                padding: const EdgeInsets.all(12),
-                itemCount: banks.length,
-                itemBuilder: (context, index) {
-                  return BankCard(bank: banks[index]);
-                },
+              return AnimationLimiter(
+                child: ListView.builder(
+                  padding: const EdgeInsets.all(12),
+                  itemCount: banks.length,
+                  itemBuilder: (context, index) {
+                    final bank = banks[index];
+                    return AnimationConfiguration.staggeredList(
+                      position: index,
+                      duration: const Duration(milliseconds: 500),
+                      child: SlideAnimation(
+                        verticalOffset: 50.0,
+                        child: FadeInAnimation(child: BankCard(bank: bank)),
+                      ),
+                    );
+                  },
+                ),
               );
             }
             if (state is BankError) {
