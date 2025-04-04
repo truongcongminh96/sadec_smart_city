@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sadec_smart_city/features/home/data/models/menu_item_model.dart';
+import 'package:sadec_smart_city/shared/utils/navigation_helper.dart';
 
 class CitizenServicesGrid extends StatelessWidget {
   final List<MenuItemModel> items;
@@ -38,37 +39,40 @@ class CitizenServicesGrid extends StatelessWidget {
         ),
         itemBuilder: (context, index) {
           final item = items[index];
-          return Column(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color:
-                      isDark
-                          ? const Color(0xFF2A2A2A)
-                          : const Color(0xFFF5F5F5),
-                  shape: BoxShape.circle,
+          return GestureDetector(
+            onTap: () => NavigationHelper.handleMenuTap(context, item),
+            child: Column(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color:
+                        isDark
+                            ? const Color(0xFF2A2A2A)
+                            : const Color(0xFFF5F5F5),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Image.network(
+                    item.icon,
+                    width: 28,
+                    height: 28,
+                    errorBuilder:
+                        (_, __, ___) => const Icon(Icons.image_not_supported),
+                  ),
                 ),
-                child: Image.network(
-                  item.icon,
-                  width: 28,
-                  height: 28,
-                  errorBuilder:
-                      (_, __, ___) => const Icon(Icons.image_not_supported),
+                const SizedBox(height: 6),
+                Text(
+                  item.ten,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    fontSize: 12,
+                    color: isDark ? Colors.white : Colors.black87,
+                  ),
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
-              ),
-              const SizedBox(height: 6),
-              Text(
-                item.ten,
-                style: theme.textTheme.bodySmall?.copyWith(
-                  fontSize: 12,
-                  color: isDark ? Colors.white : Colors.black87,
-                ),
-                textAlign: TextAlign.center,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ],
+              ],
+            ),
           );
         },
       ),
