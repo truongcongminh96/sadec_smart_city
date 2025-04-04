@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sadec_smart_city/shared/utils/call_helper.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class BankCard extends StatelessWidget {
@@ -59,8 +60,11 @@ class BankCard extends StatelessWidget {
           const SizedBox(height: 16),
           Row(
             children: [
-              Icon(Icons.call, size: 32, color: accentColor),
-              const SizedBox(width: 16),
+              IconButton(
+                icon: Icon(Icons.call, color: accentColor, size: 30),
+                onPressed: () => CallHelper.openPhone(context, bank.sdt),
+              ),
+              const SizedBox(width: 8),
               Expanded(
                 child: Text(
                   bank.sdt ?? "Không có số",
@@ -88,9 +92,36 @@ class BankCard extends StatelessWidget {
                     'https://www.google.com/maps/search/?api=1&query=${bank.gpsLat},${bank.gpsLong}',
                   );
                   if (await canLaunchUrl(url)) {
-                    await launchUrl(url);
+                    await launchUrl(url, mode: LaunchMode.externalApplication);
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Không thể mở Google Maps')),
+                    );
                   }
                 },
+                // onPressed: () {
+                //   final lat = double.tryParse(bank.gpsLat?.toString() ?? '');
+                //   final lng = double.tryParse(bank.gpsLong?.toString() ?? '');
+                //
+                //   if (lat != null && lng != null) {
+                //     showModalBottomSheet(
+                //       context: context,
+                //       isScrollControlled: true,
+                //       shape: const RoundedRectangleBorder(
+                //         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+                //       ),
+                //       builder: (_) => MapBottomSheet(
+                //         title: bank.ten ?? 'Vị trí',
+                //         lat: lat,
+                //         lng: lng,
+                //       ),
+                //     );
+                //   } else {
+                //     ScaffoldMessenger.of(context).showSnackBar(
+                //       const SnackBar(content: Text('Không tìm thấy vị trí bản đồ')),
+                //     );
+                //   }
+                // },
                 icon: Icon(Icons.location_pin, color: accentColor),
                 label: Text("Bản đồ", style: TextStyle(color: accentColor)),
                 style: TextButton.styleFrom(
