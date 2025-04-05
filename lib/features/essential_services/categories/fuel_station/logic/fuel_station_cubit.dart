@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sadec_smart_city/features/essential_services/categories/fuel_station/data/models/fuel_station.dart';
+import 'package:sadec_smart_city/features/essential_services/categories/fuel_station/data/models/fuel_station_model.dart';
 import 'package:sadec_smart_city/features/essential_services/categories/fuel_station/data/repositories/fuel_station_repository.dart';
 
 part 'fuel_station_state.dart';

@@ -3,6 +3,7 @@ import 'package:sadec_smart_city/core/network/api_service.dart';
 import 'package:sadec_smart_city/features/essential_services/categories/automatic_teller_machine/data/repositories/automatic_teller_machine_repository.dart';
 import 'package:sadec_smart_city/features/essential_services/categories/bank/data/repositories/bank_repository.dart';
 import 'package:sadec_smart_city/features/essential_services/categories/fuel_station/data/repositories/fuel_station_repository.dart';
+import 'package:sadec_smart_city/features/essential_services/categories/public_wifi_spot/data/repositories/public_wifi_spot_repository.dart';
 import 'package:sadec_smart_city/features/essential_services/data/repositories/essential_services_repository.dart';
 
 final getIt = GetIt.instance;
@@ -21,5 +22,8 @@ Future<void> setupDI() async {
   );
   getIt.registerLazySingleton<FuelStationRepository>(
     () => FuelStationRepository(getIt<ApiService>()),
+  );
+  getIt.registerLazySingleton<PublicWifiSpotRepository>(
+    () => PublicWifiSpotRepository(getIt<ApiService>()),
   );
 }

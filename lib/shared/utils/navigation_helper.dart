@@ -23,6 +23,9 @@ class NavigationHelper {
       case 102:
         context.pushNamed(AppRoutes.bankName);
         break;
+      case 103:
+        context.pushNamed(AppRoutes.publicWifiSpotName);
+        break;
       default:
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Tính năng đang được cập nhật')),
