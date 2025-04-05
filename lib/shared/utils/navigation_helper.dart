@@ -14,6 +14,9 @@ class NavigationHelper {
       case 5:
         // context.pushNamed('education');
         break;
+      case 63:
+        context.pushNamed(AppRoutes.automaticTellerMachineName);
+        break;
       case 102:
         context.pushNamed(AppRoutes.bankName);
         break;

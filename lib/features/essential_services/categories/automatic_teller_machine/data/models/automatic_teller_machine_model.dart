@@ -1,4 +1,4 @@
-class BankModel {
+class AutomaticTellerMachineModel {
   final String groupName;
   final int tableId;
   final int detailId;
@@ -10,7 +10,7 @@ class BankModel {
   final int stt;
   final int gps;
 
-  BankModel({
+  AutomaticTellerMachineModel({
     required this.groupName,
     required this.tableId,
     required this.detailId,
@@ -23,8 +23,8 @@ class BankModel {
     required this.gps,
   });
 
-  factory BankModel.fromJson(Map<String, dynamic> json) {
-    return BankModel(
+  factory AutomaticTellerMachineModel.fromJson(Map<String, dynamic> json) {
+    return AutomaticTellerMachineModel(
       groupName: json['groupName'] ?? '',
       tableId: json['tableId'] ?? 0,
       detailId: json['detailId'] ?? 0,

@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:sadec_smart_city/features/essential_services/categories/automatic_teller_machine/presentation/automatic_teller_machine_screen.dart';
 import 'package:sadec_smart_city/features/essential_services/categories/bank/presentation/bank_screen.dart';
 import 'app_routes.dart';
 import 'package:sadec_smart_city/features/home/presentation/home_screen.dart';
@@ -28,6 +29,11 @@ class AppRouter {
         path: AppRoutes.bank,
         name: AppRoutes.bankName,
         builder: (context, state) => const BankScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.automaticTellerMachine,
+        name: AppRoutes.automaticTellerMachineName,
+        builder: (context, state) => const AutomaticTellerMachineScreen(),
       ),
     ],
   );

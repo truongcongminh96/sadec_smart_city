@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:sadec_smart_city/core/network/api_service.dart';
+import 'package:sadec_smart_city/features/essential_services/categories/automatic_teller_machine/data/repositories/automatic_teller_machine_repository.dart';
 import 'package:sadec_smart_city/features/essential_services/categories/bank/data/repositories/bank_repository.dart';
 import 'package:sadec_smart_city/features/essential_services/data/repositories/essential_services_repository.dart';
 
@@ -13,5 +14,8 @@ Future<void> setupDI() async {
   );
   getIt.registerLazySingleton<BankRepository>(
     () => BankRepository(getIt<ApiService>()),
+  );
+  getIt.registerLazySingleton<AutomaticTellerMachineRepository>(
+        () => AutomaticTellerMachineRepository(getIt<ApiService>()),
   );
 }

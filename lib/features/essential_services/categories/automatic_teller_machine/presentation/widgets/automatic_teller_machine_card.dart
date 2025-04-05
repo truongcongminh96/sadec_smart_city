@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:sadec_smart_city/shared/utils/call_helper.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class BankCard extends StatelessWidget {
-  final dynamic bank;
+class AutomaticTellerMachineCard extends StatelessWidget {
+  final dynamic atm;
 
-  const BankCard({super.key, required this.bank});
+  const AutomaticTellerMachineCard({super.key, required this.atm});
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +45,7 @@ class BankCard extends StatelessWidget {
             children: [
               Flexible(
                 child: Text(
-                  bank.ten ?? "Tên ngân hàng",
+                  atm.ten ?? "Tên ATM",
                   style: TextStyle(
                     color: textColor,
                     fontWeight: FontWeight.bold,
@@ -57,39 +56,19 @@ class BankCard extends StatelessWidget {
               Icon(Icons.wifi, color: subTextColor, size: 20),
             ],
           ),
-          const SizedBox(height: 16),
-          Row(
-            children: [
-              IconButton(
-                icon: Icon(Icons.call, color: accentColor, size: 30),
-                onPressed: () => CallHelper.openPhone(context, bank.sdt),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: Text(
-                  bank.sdt ?? "Không có số",
-                  style: TextStyle(
-                    letterSpacing: 2,
-                    fontSize: 18,
-                    color: textColor,
-                  ),
-                ),
-              ),
-            ],
-          ),
           const SizedBox(height: 12),
           Text(
-            bank.diaChi ?? "Địa chỉ đang cập nhật",
+            atm.diaChi ?? "Địa chỉ đang cập nhật",
             style: TextStyle(color: subTextColor, fontSize: 13),
           ),
           const SizedBox(height: 15),
-          if (bank.gpsLat != null && bank.gpsLong != null)
+          if (atm.gpsLat != null && atm.gpsLong != null)
             Align(
               alignment: Alignment.centerRight,
               child: TextButton.icon(
                 onPressed: () async {
                   final url = Uri.parse(
-                    'https://www.google.com/maps/search/?api=1&query=${bank.gpsLat},${bank.gpsLong}',
+                    'https://www.google.com/maps/search/?api=1&query=${atm.gpsLat},${atm.gpsLong}',
                   );
                   if (await canLaunchUrl(url)) {
                     await launchUrl(url, mode: LaunchMode.externalApplication);
@@ -100,29 +79,6 @@ class BankCard extends StatelessWidget {
                     );
                   }
                 },
-                // onPressed: () {
-                //   final lat = double.tryParse(bank.gpsLat?.toString() ?? '');
-                //   final lng = double.tryParse(bank.gpsLong?.toString() ?? '');
-                //
-                //   if (lat != null && lng != null) {
-                //     showModalBottomSheet(
-                //       context: context,
-                //       isScrollControlled: true,
-                //       shape: const RoundedRectangleBorder(
-                //         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-                //       ),
-                //       builder: (_) => MapBottomSheet(
-                //         title: bank.ten ?? 'Vị trí',
-                //         lat: lat,
-                //         lng: lng,
-                //       ),
-                //     );
-                //   } else {
-                //     ScaffoldMessenger.of(context).showSnackBar(
-                //       const SnackBar(content: Text('Không tìm thấy vị trí bản đồ')),
-                //     );
-                //   }
-                // },
                 icon: Icon(Icons.location_pin, color: accentColor),
                 label: Text("Bản đồ", style: TextStyle(color: accentColor)),
                 style: TextButton.styleFrom(
