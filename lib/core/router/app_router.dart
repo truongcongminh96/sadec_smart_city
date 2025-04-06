@@ -26,27 +26,42 @@ class AppRouter {
       GoRoute(
         path: AppRoutes.essentialServices,
         name: AppRoutes.essentialServicesName,
-        builder: (context, state) => const EssentialServicesScreen(),
+        builder: (context, state) {
+          final menuAppId = state.extra as int;
+          return EssentialServicesScreen(menuAppId: menuAppId);
+        },
       ),
       GoRoute(
         path: AppRoutes.bank,
         name: AppRoutes.bankName,
-        builder: (context, state) => const BankScreen(),
+        builder: (context, state) {
+          final menuAppId = state.extra as int;
+          return BankScreen(menuAppId: menuAppId);
+        },
       ),
       GoRoute(
         path: AppRoutes.automaticTellerMachine,
         name: AppRoutes.automaticTellerMachineName,
-        builder: (context, state) => const AutomaticTellerMachineScreen(),
+        builder: (context, state) {
+          final menuAppId = state.extra as int;
+          return AutomaticTellerMachineScreen(menuAppId: menuAppId);
+        },
       ),
       GoRoute(
         path: AppRoutes.fuelStation,
         name: AppRoutes.fuelStationName,
-        builder: (context, state) => const FuelStationScreen(),
+        builder: (context, state) {
+          final menuAppId = state.extra as int;
+          return FuelStationScreen(menuAppId: menuAppId);
+        },
       ),
       GoRoute(
         path: AppRoutes.publicWifiSpot,
         name: AppRoutes.publicWifiSpotName,
-        builder: (context, state) => const PublicWifiSpotScreen(),
+        builder: (context, state) {
+          final menuAppId = state.extra as int;
+          return PublicWifiSpotScreen(menuAppId: menuAppId);
+        },
       ),
       GoRoute(
         path: AppRoutes.transportationServices,

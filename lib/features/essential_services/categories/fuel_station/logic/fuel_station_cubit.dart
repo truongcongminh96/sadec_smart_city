@@ -10,10 +10,10 @@ class FuelStationCubit extends Cubit<FuelStationState> {
 
   FuelStationCubit(this.repository) : super(FuelStationInitial());
 
-  Future<void> loadFuelStations() async {
+  Future<void> loadFuelStations(int menuAppId) async {
     emit(FuelStationLoading());
     try {
-      final fuelStations = await repository.fetchFuelStations(62);
+      final fuelStations = await repository.fetchFuelStations(menuAppId);
       emit(
         FuelStationLoaded(
           fuelStations: fuelStations,

@@ -10,10 +10,10 @@ class BankCubit extends Cubit<BankState> {
 
   BankCubit(this.repository) : super(BankInitial());
 
-  Future<void> loadBanks() async {
+  Future<void> loadBanks(int menuAppId) async {
     emit(BankLoading());
     try {
-      final banks = await repository.fetchBanks(102);
+      final banks = await repository.fetchBanks(menuAppId);
       emit(BankLoaded(banks: banks, allBanks: banks));
     } catch (e) {
       emit(BankError(e.toString()));

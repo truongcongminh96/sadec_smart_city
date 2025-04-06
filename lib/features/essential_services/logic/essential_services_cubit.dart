@@ -16,10 +16,10 @@ class EssentialServicesCubit extends Cubit<EssentialServicesState> {
 
   Map<int, List<EssentialServiceModel>> get subServicesMap => _subServicesMap;
 
-  Future<void> fetchEssentialServices() async {
+  Future<void> fetchEssentialServices(int menuAppId) async {
     emit(EssentialServicesLoading());
     try {
-      final services = await _repository.fetchServices(menuAppId: 3);
+      final services = await _repository.fetchServices(menuAppId: menuAppId);
       _mainServices = services;
       emit(EssentialServicesLoaded());
     } catch (e) {

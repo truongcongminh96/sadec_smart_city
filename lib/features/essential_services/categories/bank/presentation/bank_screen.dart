@@ -8,7 +8,9 @@ import 'package:sadec_smart_city/features/essential_services/categories/bank/pre
 import 'package:sadec_smart_city/features/essential_services/categories/bank/presentation/widgets/bank_search_bar.dart';
 
 class BankScreen extends StatefulWidget {
-  const BankScreen({super.key});
+  const BankScreen({super.key, required this.menuAppId});
+
+  final int menuAppId;
 
   @override
   State<BankScreen> createState() => _BankScreenState();
@@ -26,7 +28,9 @@ class _BankScreenState extends State<BankScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => BankCubit(getIt<BankRepository>())..loadBanks(),
+      create:
+          (_) =>
+              BankCubit(getIt<BankRepository>())..loadBanks(widget.menuAppId),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Danh sách Ngân hàng'),

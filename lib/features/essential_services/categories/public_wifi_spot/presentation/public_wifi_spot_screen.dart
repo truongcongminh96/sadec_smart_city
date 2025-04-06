@@ -8,7 +8,9 @@ import 'package:sadec_smart_city/features/essential_services/categories/public_w
 import 'package:sadec_smart_city/features/essential_services/categories/public_wifi_spot/presentation/widgets/public_wifi_spot_search_bar.dart';
 
 class PublicWifiSpotScreen extends StatefulWidget {
-  const PublicWifiSpotScreen({super.key});
+  const PublicWifiSpotScreen({super.key, required this.menuAppId});
+
+  final int menuAppId;
 
   @override
   State<PublicWifiSpotScreen> createState() => _PublicWifiSpotScreenState();
@@ -29,7 +31,7 @@ class _PublicWifiSpotScreenState extends State<PublicWifiSpotScreen> {
       create:
           (_) =>
               PublicWifiSpotCubit(getIt<PublicWifiSpotRepository>())
-                ..loadPublicWifiSpots(),
+                ..loadPublicWifiSpots(widget.menuAppId),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Điểm wifi công cộng'),

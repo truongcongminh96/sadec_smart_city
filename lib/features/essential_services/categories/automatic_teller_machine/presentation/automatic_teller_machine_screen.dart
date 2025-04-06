@@ -8,7 +8,9 @@ import 'package:sadec_smart_city/features/essential_services/categories/automati
 import 'package:sadec_smart_city/features/essential_services/categories/automatic_teller_machine/presentation/widgets/automatic_teller_machine_search_bar.dart';
 
 class AutomaticTellerMachineScreen extends StatefulWidget {
-  const AutomaticTellerMachineScreen({super.key});
+  const AutomaticTellerMachineScreen({super.key, required this.menuAppId});
+
+  final int menuAppId;
 
   @override
   State<AutomaticTellerMachineScreen> createState() =>
@@ -31,7 +33,7 @@ class _AutomaticTellerMachineScreenState
       create:
           (_) => AutomaticTellerMachineCubit(
             getIt<AutomaticTellerMachineRepository>(),
-          )..loadAtms(),
+          )..loadAtms(widget.menuAppId),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Danh sách ATM'),
@@ -56,9 +58,7 @@ class _AutomaticTellerMachineScreenState
             if (state is AutomaticTellerMachineLoaded) {
               final atms = state.atms;
               if (atms.isEmpty) {
-                return const Center(
-                  child: Text("Không tìm thấy ATM."),
-                );
+                return const Center(child: Text("Không tìm thấy ATM."));
               }
               return AnimationLimiter(
                 child: ListView.builder(

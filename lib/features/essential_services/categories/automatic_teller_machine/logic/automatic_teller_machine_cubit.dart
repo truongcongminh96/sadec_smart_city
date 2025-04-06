@@ -11,10 +11,10 @@ class AutomaticTellerMachineCubit extends Cubit<AutomaticTellerMachineState> {
   AutomaticTellerMachineCubit(this.repository)
     : super(AutomaticTellerMachineInitial());
 
-  Future<void> loadAtms() async {
+  Future<void> loadAtms(menuAppId) async {
     emit(AutomaticTellerMachineLoading());
     try {
-      final atms = await repository.fetchAtms(63);
+      final atms = await repository.fetchAtms(menuAppId);
       emit(AutomaticTellerMachineLoaded(atms: atms, allAtms: atms));
     } catch (e) {
       emit(AutomaticTellerMachineError(e.toString()));

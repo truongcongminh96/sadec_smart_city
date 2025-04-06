@@ -8,7 +8,9 @@ import 'package:sadec_smart_city/features/essential_services/categories/fuel_sta
 import 'package:sadec_smart_city/features/essential_services/categories/fuel_station/presentation/widgets/fuel_station_search_bar.dart';
 
 class FuelStationScreen extends StatefulWidget {
-  const FuelStationScreen({super.key});
+  const FuelStationScreen({super.key, required this.menuAppId});
+
+  final int menuAppId;
 
   @override
   State<FuelStationScreen> createState() => _FuelStationScreenState();
@@ -29,7 +31,7 @@ class _FuelStationScreenState extends State<FuelStationScreen> {
       create:
           (_) =>
               FuelStationCubit(getIt<FuelStationRepository>())
-                ..loadFuelStations(),
+                ..loadFuelStations(widget.menuAppId),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Danh sách trạm xăng'),

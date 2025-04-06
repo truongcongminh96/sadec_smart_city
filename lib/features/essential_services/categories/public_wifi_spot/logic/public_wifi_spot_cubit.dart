@@ -10,10 +10,10 @@ class PublicWifiSpotCubit extends Cubit<PublicWifiSpotState> {
 
   PublicWifiSpotCubit(this.repository) : super(PublicWifiSpotInitial());
 
-  Future<void> loadPublicWifiSpots() async {
+  Future<void> loadPublicWifiSpots(int menuAppId) async {
     emit(PublicWifiSpotLoading());
     try {
-      final publicWifiSpots = await repository.fetchPublicWifiSpots(103);
+      final publicWifiSpots = await repository.fetchPublicWifiSpots(menuAppId);
       emit(
         PublicWifiSpotLoaded(
           publicWifiSpots: publicWifiSpots,

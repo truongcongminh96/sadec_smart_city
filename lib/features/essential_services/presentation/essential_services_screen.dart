@@ -6,12 +6,17 @@ import 'package:sadec_smart_city/features/essential_services/presentation/widget
 import 'package:sadec_smart_city/features/essential_services/presentation/widgets/other_service_grid.dart';
 
 class EssentialServicesScreen extends StatelessWidget {
-  const EssentialServicesScreen({super.key});
+  const EssentialServicesScreen({super.key, required this.menuAppId});
+
+  final int menuAppId;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => EssentialServicesCubit(getIt())..fetchEssentialServices(),
+      create:
+          (_) =>
+              EssentialServicesCubit(getIt())
+                ..fetchEssentialServices(menuAppId),
       child: const _EssentialServicesView(),
     );
   }
