@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:sadec_smart_city/core/di/injector.dart';
 import 'package:sadec_smart_city/features/transportation_services/logic/transportation_services_cubit.dart';
 import 'package:sadec_smart_city/features/transportation_services/presentation/widgets/transportation_service_item.dart';
@@ -25,9 +26,10 @@ class TransportationServicesView extends StatelessWidget {
   const TransportationServicesView({super.key});
 
   int _calculateCrossAxisCount(double width) {
-    if (width >= 1024) return 6; // desktop
-    if (width >= 768) return 4; // tablet
-    return 2; // phone
+    if (width >= 1200) return 6;
+    if (width >= 800) return 4;
+    if (width >= 600) return 3;
+    return 2;
   }
 
   @override
@@ -50,16 +52,33 @@ class TransportationServicesView extends StatelessWidget {
             if (state is TransportationServicesLoading) {
               return const Center(child: CircularProgressIndicator());
             } else if (state is TransportationServicesLoaded) {
-              return SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    for (final service in state.transportationServices)
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8),
-                        child: TransportationServiceItem(item: service),
+              final services = state.transportationServices;
+
+              return AnimationLimiter(
+                child: GridView.builder(
+                  itemCount: services.length,
+                  shrinkWrap: true,
+                  physics: const BouncingScrollPhysics(),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: crossAxisCount,
+                    mainAxisSpacing: 16,
+                    crossAxisSpacing: 16,
+                    mainAxisExtent: 80,
+                  ),
+                  itemBuilder: (context, index) {
+                    final item = services[index];
+                    return AnimationConfiguration.staggeredGrid(
+                      position: index,
+                      columnCount: crossAxisCount,
+                      duration: const Duration(milliseconds: 500),
+                      child: SlideAnimation(
+                        verticalOffset: 50,
+                        child: FadeInAnimation(
+                          child: TransportationServiceItem(item: item),
+                        ),
                       ),
-                  ],
+                    );
+                  },
                 ),
               );
             } else if (state is TransportationServicesError) {
