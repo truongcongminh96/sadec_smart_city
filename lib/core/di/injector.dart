@@ -6,12 +6,15 @@ import 'package:sadec_smart_city/features/essential_services/categories/fuel_sta
 import 'package:sadec_smart_city/features/essential_services/categories/other_essential_services/data/repositories/other_essential_services_repository.dart';
 import 'package:sadec_smart_city/features/essential_services/categories/public_wifi_spot/data/repositories/public_wifi_spot_repository.dart';
 import 'package:sadec_smart_city/features/essential_services/data/repositories/essential_services_repository.dart';
+import 'package:sadec_smart_city/features/transportation_services/data/repositories/transportation_services_repository.dart';
 
 final getIt = GetIt.instance;
 
 Future<void> setupDI() async {
   // Register repositories, services here
   getIt.registerLazySingleton<ApiService>(() => ApiService());
+
+  //Essential services
   getIt.registerLazySingleton<EssentialServiceRepository>(
     () => EssentialServiceRepository(getIt<ApiService>()),
   );
@@ -29,5 +32,10 @@ Future<void> setupDI() async {
   );
   getIt.registerLazySingleton<PublicWifiSpotRepository>(
     () => PublicWifiSpotRepository(getIt<ApiService>()),
+  );
+
+  // Transportation services
+  getIt.registerLazySingleton<TransportationServicesRepository>(
+    () => TransportationServicesRepository(getIt<ApiService>()),
   );
 }

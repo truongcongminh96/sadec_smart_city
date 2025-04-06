@@ -7,6 +7,7 @@ import 'package:sadec_smart_city/features/home/presentation/home_screen.dart';
 import 'package:sadec_smart_city/features/report_issue/presentation/report_issue_screen.dart';
 import 'package:sadec_smart_city/features/essential_services/presentation/essential_services_screen.dart';
 import 'package:sadec_smart_city/features/essential_services/categories/public_wifi_spot/presentation/public_wifi_spot_screen.dart';
+import 'package:sadec_smart_city/features/transportation_services/presentation/transportation_services_screen.dart';
 
 class AppRouter {
   static final router = GoRouter(
@@ -46,6 +47,14 @@ class AppRouter {
         path: AppRoutes.publicWifiSpot,
         name: AppRoutes.publicWifiSpotName,
         builder: (context, state) => const PublicWifiSpotScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.transportationServices,
+        name: AppRoutes.transportationServicesName,
+        builder: (context, state) {
+          final menuAppId = state.extra as int;
+          return TransportationServicesScreen(menuAppId: menuAppId);
+        },
       ),
     ],
   );
