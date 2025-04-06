@@ -43,7 +43,7 @@ class _EssentialServicesView extends StatelessWidget {
               final cubit = context.read<EssentialServicesCubit>();
               final mainItems =
                   cubit.mainServices.where((e) => e.hasSubmenu == 0).toList();
-              final submenuItems =
+              final hasSubmenuItems =
                   cubit.mainServices.where((e) => e.hasSubmenu == 1).toList();
 
               return SingleChildScrollView(
@@ -58,8 +58,8 @@ class _EssentialServicesView extends StatelessWidget {
                       },
                     ),
                     const SizedBox(height: 24),
-                    for (final item in submenuItems)
-                      OtherServiceGrid(item: item),
+                    for (final hasSubmenuItem in hasSubmenuItems)
+                      OtherServiceGrid(item: hasSubmenuItem),
                   ],
                 ),
               );
