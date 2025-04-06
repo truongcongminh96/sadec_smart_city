@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sadec_smart_city/features/home/data/models/menu_item_model.dart';
+import 'package:sadec_smart_city/shared/screens/webview_screen.dart';
 import 'package:sadec_smart_city/shared/utils/navigation_helper.dart';
 
 class CitizenServicesGrid extends StatelessWidget {
@@ -40,11 +41,22 @@ class CitizenServicesGrid extends StatelessWidget {
         itemBuilder: (context, index) {
           final item = items[index];
           return GestureDetector(
-            onTap:
-                () => NavigationHelper.handleMenuTapWithMenuAppId(
+            onTap: () {
+              if (item.type == 1 && item.link.isNotEmpty) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder:
+                        (_) => WebViewScreen(title: item.ten, url: item.link),
+                  ),
+                );
+              } else {
+                NavigationHelper.handleMenuTapWithMenuAppId(
                   context,
                   item.menuAppId,
-                ),
+                );
+              }
+            },
             child: Column(
               children: [
                 Container(
