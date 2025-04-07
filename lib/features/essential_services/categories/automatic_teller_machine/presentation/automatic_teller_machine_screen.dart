@@ -6,6 +6,7 @@ import 'package:sadec_smart_city/features/essential_services/categories/automati
 import 'package:sadec_smart_city/features/essential_services/categories/automatic_teller_machine/logic/automatic_teller_machine_cubit.dart';
 import 'package:sadec_smart_city/features/essential_services/categories/automatic_teller_machine/presentation/widgets/automatic_teller_machine_card.dart';
 import 'package:sadec_smart_city/features/essential_services/categories/automatic_teller_machine/presentation/widgets/automatic_teller_machine_search_bar.dart';
+import 'package:sadec_smart_city/shared/widgets/empty_state_widget.dart';
 
 class AutomaticTellerMachineScreen extends StatefulWidget {
   const AutomaticTellerMachineScreen({super.key, required this.menuAppId});
@@ -58,7 +59,10 @@ class _AutomaticTellerMachineScreenState
             if (state is AutomaticTellerMachineLoaded) {
               final atms = state.atms;
               if (atms.isEmpty) {
-                return const Center(child: Text("Không tìm thấy ATM."));
+                return const EmptyStateWidget(
+                  title: "Không có địa điểm nào khớp",
+                  subtitle: "Hãy thử lại với từ khóa khác nhé!",
+                );
               }
               return AnimationLimiter(
                 child: ListView.builder(

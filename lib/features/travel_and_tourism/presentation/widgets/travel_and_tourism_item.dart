@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:sadec_smart_city/core/theme/matcha_theme.dart';
 import 'package:sadec_smart_city/features/travel_and_tourism/data/models/travel_and_tourism_model.dart';
+import 'package:sadec_smart_city/shared/utils/navigation_helper.dart';
 
 class TravelAndTourismItem extends StatefulWidget {
   final TravelAndTourismModel item;
@@ -158,35 +159,42 @@ class _TravelAndTourismItemState extends State<TravelAndTourismItem>
                 right: 24,
                 child: SlideTransition(
                   position: _buttonSlide,
-                  child: Container(
-                    height: 50,
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    decoration: BoxDecoration(
-                      color: Colors.black.withValues(alpha: 0.5),
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Icon(Icons.arrow_forward, color: Colors.white),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 20,
-                            vertical: 10,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.green,
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          child: const Text(
-                            "Khám phá ngay!",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
+                  child: GestureDetector(
+                    onTap:
+                        () => NavigationHelper.handleMenuTapWithMenuAppId(
+                          context,
+                          widget.item.menuAppId,
+                        ),
+                    child: Container(
+                      height: 50,
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      decoration: BoxDecoration(
+                        color: Colors.black.withValues(alpha: 0.5),
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Icon(Icons.arrow_forward, color: Colors.white),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 10,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.green,
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            child: const Text(
+                              "Khám phá ngay!",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),

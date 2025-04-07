@@ -8,6 +8,7 @@ class AppRoutes {
   static const automaticTellerMachine = '/essential-services/automatic-teller-machine';
   static const fuelStation = '/essential-services/fuel-station';
   static const publicWifiSpot = '/essential-services/public-wifi-spot';
+  static const heritagePlace = '/travel-and-tourism/heritage-place';
 
   static const homeName = 'home';
   static const reportName = 'report';
@@ -20,4 +21,6 @@ class AppRoutes {
   static const automaticTellerMachineName = 'automatic-teller-machine';
   static const fuelStationName = 'fuel-station';
   static const publicWifiSpotName = 'public-wifi-spot';
+
+  static const heritagePlaceName = 'heritage-place';
 }

@@ -6,6 +6,7 @@ import 'package:sadec_smart_city/features/essential_services/categories/fuel_sta
 import 'package:sadec_smart_city/features/essential_services/categories/fuel_station/logic/fuel_station_cubit.dart';
 import 'package:sadec_smart_city/features/essential_services/categories/fuel_station/presentation/widgets/fuel_station_card.dart';
 import 'package:sadec_smart_city/features/essential_services/categories/fuel_station/presentation/widgets/fuel_station_search_bar.dart';
+import 'package:sadec_smart_city/shared/widgets/empty_state_widget.dart';
 
 class FuelStationScreen extends StatefulWidget {
   const FuelStationScreen({super.key, required this.menuAppId});
@@ -52,7 +53,10 @@ class _FuelStationScreenState extends State<FuelStationScreen> {
             if (state is FuelStationLoaded) {
               final fuelStations = state.fuelStations;
               if (fuelStations.isEmpty) {
-                return const Center(child: Text("Không tìm thấy trạm xăng."));
+                return const EmptyStateWidget(
+                  title: "Không có địa điểm nào khớp",
+                  subtitle: "Hãy thử lại với từ khóa khác nhé!",
+                );
               }
               return AnimationLimiter(
                 child: ListView.builder(

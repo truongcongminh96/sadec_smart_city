@@ -1,5 +1,3 @@
-import 'package:sadec_smart_city/features/travel_and_tourism/presentation/travel_and_tourism_screen.dart';
-
 import 'app_routes.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sadec_smart_city/features/essential_services/categories/automatic_teller_machine/presentation/automatic_teller_machine_screen.dart';
@@ -10,6 +8,8 @@ import 'package:sadec_smart_city/features/report_issue/presentation/report_issue
 import 'package:sadec_smart_city/features/essential_services/presentation/essential_services_screen.dart';
 import 'package:sadec_smart_city/features/essential_services/categories/public_wifi_spot/presentation/public_wifi_spot_screen.dart';
 import 'package:sadec_smart_city/features/transportation_services/presentation/transportation_services_screen.dart';
+import 'package:sadec_smart_city/features/travel_and_tourism/categories/heritage_sites/presentation/heritage_place_screen.dart';
+import 'package:sadec_smart_city/features/travel_and_tourism/presentation/travel_and_tourism_screen.dart';
 
 class AppRouter {
   static final router = GoRouter(
@@ -79,6 +79,14 @@ class AppRouter {
         builder: (context, state) {
           final menuAppId = state.extra as int;
           return TravelAndTourismScreen(menuAppId: menuAppId);
+        },
+      ),
+      GoRoute(
+        path: AppRoutes.heritagePlace,
+        name: AppRoutes.heritagePlaceName,
+        builder: (context, state) {
+          final menuAppId = state.extra as int;
+          return HeritagePlacesScreen(menuAppId: menuAppId);
         },
       ),
     ],

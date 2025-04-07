@@ -6,6 +6,7 @@ import 'package:sadec_smart_city/features/essential_services/categories/public_w
 import 'package:sadec_smart_city/features/essential_services/categories/public_wifi_spot/logic/public_wifi_spot_cubit.dart';
 import 'package:sadec_smart_city/features/essential_services/categories/public_wifi_spot/presentation/widgets/public_wifi_spot_card.dart';
 import 'package:sadec_smart_city/features/essential_services/categories/public_wifi_spot/presentation/widgets/public_wifi_spot_search_bar.dart';
+import 'package:sadec_smart_city/shared/widgets/empty_state_widget.dart';
 
 class PublicWifiSpotScreen extends StatefulWidget {
   const PublicWifiSpotScreen({super.key, required this.menuAppId});
@@ -52,7 +53,10 @@ class _PublicWifiSpotScreenState extends State<PublicWifiSpotScreen> {
             if (state is PublicWifiSpotLoaded) {
               final publicWifiSpots = state.publicWifiSpots;
               if (publicWifiSpots.isEmpty) {
-                return const Center(child: Text("Không tìm thấy trạm wifi."));
+                return const EmptyStateWidget(
+                  title: "Không có địa điểm nào khớp",
+                  subtitle: "Hãy thử lại với từ khóa khác nhé!",
+                );
               }
               return AnimationLimiter(
                 child: ListView.builder(

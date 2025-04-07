@@ -1,0 +1,24 @@
+part of 'heritage_place_cubit.dart';
+
+@immutable
+sealed class HeritagePlaceState {}
+
+final class HeritagePlaceInitial extends HeritagePlaceState {}
+
+class HeritagePlaceLoading extends HeritagePlaceState {}
+
+class HeritagePlaceLoaded extends HeritagePlaceState {
+  final List<HeritagePlaceModel> heritagePlaces;
+  final List<HeritagePlaceModel> allHeritagePlaces;
+
+  HeritagePlaceLoaded({
+    required this.heritagePlaces,
+    required this.allHeritagePlaces,
+  });
+}
+
+class HeritagePlaceError extends HeritagePlaceState {
+  final String message;
+
+  HeritagePlaceError(this.message);
+}

@@ -6,6 +6,7 @@ import 'package:sadec_smart_city/features/essential_services/categories/bank/dat
 import 'package:sadec_smart_city/features/essential_services/categories/bank/logic/bank_cubit.dart';
 import 'package:sadec_smart_city/features/essential_services/categories/bank/presentation/widgets/bank_card.dart';
 import 'package:sadec_smart_city/features/essential_services/categories/bank/presentation/widgets/bank_search_bar.dart';
+import 'package:sadec_smart_city/shared/widgets/empty_state_widget.dart';
 
 class BankScreen extends StatefulWidget {
   const BankScreen({super.key, required this.menuAppId});
@@ -50,8 +51,9 @@ class _BankScreenState extends State<BankScreen> {
             if (state is BankLoaded) {
               final banks = state.banks;
               if (banks.isEmpty) {
-                return const Center(
-                  child: Text("Không tìm thấy ngân hàng nào."),
+                return const EmptyStateWidget(
+                  title: "Không có địa điểm nào khớp",
+                  subtitle: "Hãy thử lại với từ khóa khác nhé!",
                 );
               }
               return AnimationLimiter(

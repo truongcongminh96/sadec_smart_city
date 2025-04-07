@@ -29,6 +29,9 @@ class NavigationHelper {
           extra: menuAppId,
         );
         break;
+      case 78:
+        context.pushNamed(AppRoutes.heritagePlaceName, extra: menuAppId);
+        break;
       case 102:
         context.pushNamed(AppRoutes.bankName, extra: menuAppId);
         break;
