@@ -10,6 +10,7 @@ import 'package:sadec_smart_city/features/essential_services/categories/public_w
 import 'package:sadec_smart_city/features/transportation_services/presentation/transportation_services_screen.dart';
 import 'package:sadec_smart_city/features/travel_and_tourism/categories/heritage_sites/presentation/heritage_place_screen.dart';
 import 'package:sadec_smart_city/features/travel_and_tourism/presentation/travel_and_tourism_screen.dart';
+import 'package:sadec_smart_city/features/travel_and_tourism/categories/heritage_sites/presentation/detail/heritage_place_detail_screen.dart';
 
 class AppRouter {
   static final router = GoRouter(
@@ -87,6 +88,20 @@ class AppRouter {
         builder: (context, state) {
           final menuAppId = state.extra as int;
           return HeritagePlacesScreen(menuAppId: menuAppId);
+        },
+      ),
+      GoRoute(
+        path: AppRoutes.heritagePlaceDetail,
+        name: AppRoutes.heritagePlaceDetailName,
+        builder: (context, state) {
+          final args = state.extra as Map<String, dynamic>;
+          final detailId = args['detailId'] as int;
+          final tableId = args['tableId'] as int;
+
+          return HeritagePlaceDetailScreen(
+            tableId: tableId,
+            detailId: detailId,
+          );
         },
       ),
     ],

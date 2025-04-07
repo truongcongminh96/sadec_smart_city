@@ -44,4 +44,15 @@ class NavigationHelper {
         );
     }
   }
+
+  static void handleDetailTapWithTableIdAnDetailId(
+    BuildContext context, {
+    required int tableId,
+    required int detailId,
+  }) {
+    context.pushNamed(
+      AppRoutes.heritagePlaceDetailName,
+      extra: {'tableId': tableId, 'detailId': detailId},
+    );
+  }
 }

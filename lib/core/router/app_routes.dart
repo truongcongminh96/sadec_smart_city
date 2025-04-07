@@ -23,4 +23,6 @@ class AppRoutes {
   static const publicWifiSpotName = 'public-wifi-spot';
 
   static const heritagePlaceName = 'heritage-place';
+  static const heritagePlaceDetail = '/travel-and-tourism/heritage-place/detail';
+  static const heritagePlaceDetailName = 'heritage-place-detail';
 }

@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:sadec_smart_city/features/travel_and_tourism/categories/heritage_sites/data/models/heritage_place_model.dart';
+import 'package:sadec_smart_city/shared/utils/navigation_helper.dart';
 
 class HeritagePlaceCard extends StatefulWidget {
   final HeritagePlaceModel place;
@@ -134,26 +135,35 @@ class _HeritagePlaceCardState extends State<HeritagePlaceCard>
               bottom: 12,
               left: 16,
               right: 16,
-              child: Container(
-                height: 50,
-                decoration: BoxDecoration(
-                  color: colorScheme.surface.withOpacity(0.9),
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    const Icon(Icons.favorite, color: Colors.red, size: 20),
-                    Text(
-                      "120k",
-                      style: TextStyle(color: colorScheme.onSurface),
+              child: GestureDetector(
+                onTap:
+                    () => NavigationHelper.handleDetailTapWithTableIdAnDetailId(
+                      context,
+                      tableId: widget.place.tableId,
+                      detailId: widget.place.detailId,
                     ),
-                    const Icon(Icons.comment, size: 20),
-                    Text("530", style: TextStyle(color: colorScheme.onSurface)),
-                    const Icon(Icons.share, size: 20),
-                    Text("22", style: TextStyle(color: colorScheme.onSurface)),
-                  ],
+                child: Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: colorScheme.surface.withValues(alpha: 0.9),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      const Icon(Icons.favorite, color: Colors.red, size: 20),
+                      Text(
+                        "${place.detailId + place.tableId} Lượt thích",
+                        style: TextStyle(color: colorScheme.onSurface),
+                      ),
+                      const Icon(Icons.filter, size: 20),
+                      Text(
+                        "Xem chi tiết",
+                        style: TextStyle(color: colorScheme.onSurface),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
