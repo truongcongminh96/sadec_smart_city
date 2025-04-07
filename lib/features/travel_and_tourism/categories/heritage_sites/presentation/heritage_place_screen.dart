@@ -58,12 +58,27 @@ class _HeritagePlacesViewState extends State<HeritagePlacesView> {
                       subtitle: "Hãy thử lại với từ khóa khác nhé!",
                     );
                   }
-                  return ListView.builder(
-                    controller: _scrollController,
-                    padding: const EdgeInsets.all(16),
-                    itemCount: places.length,
-                    itemBuilder: (context, index) {
-                      return HeritagePlaceCard(place: places[index]);
+
+                  return LayoutBuilder(
+                    builder: (context, constraints) {
+                      final width = constraints.maxWidth;
+                      final crossAxisCount =
+                          width >= 1024 ? 4 : (width >= 700 ? 2 : 1);
+
+                      return GridView.builder(
+                        controller: _scrollController,
+                        padding: const EdgeInsets.all(16),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: crossAxisCount,
+                          mainAxisSpacing: 16,
+                          crossAxisSpacing: 16,
+                          mainAxisExtent: 260,
+                        ),
+                        itemCount: places.length,
+                        itemBuilder: (context, index) {
+                          return HeritagePlaceCard(place: places[index]);
+                        },
+                      );
                     },
                   );
                 } else if (state is HeritagePlaceLoading) {
