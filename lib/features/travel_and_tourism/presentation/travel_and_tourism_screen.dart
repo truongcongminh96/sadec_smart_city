@@ -19,63 +19,80 @@ class TravelAndTourismScreen extends StatelessWidget {
             (_) =>
                 TravelAndTourismCubit(getIt())
                   ..fetchTravelAndTourism(menuAppId),
-        child: const TravelAndTourismView(),
+        child: TravelAndTourismView(menuAppId: menuAppId),
       ),
     );
   }
 }
 
-class TravelAndTourismView extends StatelessWidget {
-  const TravelAndTourismView({super.key});
+class TravelAndTourismView extends StatefulWidget {
+  const TravelAndTourismView({super.key, required this.menuAppId});
+
+  final int menuAppId;
+
+  @override
+  State<TravelAndTourismView> createState() => _TravelAndTourismViewState();
+}
+
+class _TravelAndTourismViewState extends State<TravelAndTourismView> {
+  final scrollController = ScrollController();
+  double scrollOffset = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    scrollController.addListener(() {
+      setState(() {
+        scrollOffset = scrollController.offset;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: const TravelAndTourismHeader(),
-        body: SafeArea(
-          child: BlocBuilder<TravelAndTourismCubit, TravelAndTourismState>(
-            builder: (context, state) {
-              if (state is TravelAndTourismLoaded) {
-                final items = state.travelAndTourism;
+        body: BlocBuilder<TravelAndTourismCubit, TravelAndTourismState>(
+          builder: (context, state) {
+            if (state is TravelAndTourismLoaded) {
+              final items = state.travelAndTourism;
 
-                return LayoutBuilder(
-                  builder: (context, constraints) {
-                    final width = constraints.maxWidth;
+              return LayoutBuilder(
+                builder: (context, constraints) {
+                  final width = constraints.maxWidth;
+                  int crossAxisCount =
+                      width >= 1024 ? 4 : (width >= 700 ? 2 : 1);
 
-                    int crossAxisCount = 1;
-                    if (width >= 1024) {
-                      crossAxisCount = 4;
-                    } else if (width >= 700) {
-                      crossAxisCount = 2;
-                    }
-
-                    return GridView.builder(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 24,
-                      ),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: crossAxisCount,
-                        mainAxisSpacing: 16,
-                        crossAxisSpacing: 16,
-                        mainAxisExtent: 200,
-                      ),
-                      itemCount: items.length,
-                      itemBuilder:
-                          (_, index) =>
-                              TravelAndTourismItem(item: items[index]),
-                    );
-                  },
-                );
-              } else if (state is TravelAndTourismLoading) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (state is TravelAndTourismError) {
-                return Center(child: Text("Lỗi: ${state.message}"));
-              }
-              return const SizedBox();
-            },
-          ),
+                  return GridView.builder(
+                    controller: scrollController,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 24,
+                    ),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: crossAxisCount,
+                      mainAxisSpacing: 16,
+                      crossAxisSpacing: 16,
+                      mainAxisExtent: 200,
+                    ),
+                    itemCount: items.length,
+                    itemBuilder: (_, index) {
+                      return TravelAndTourismItem(
+                        item: items[index],
+                        scrollOffset: scrollOffset,
+                      );
+                    },
+                  );
+                },
+              );
+            } else if (state is TravelAndTourismLoading) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (state is TravelAndTourismError) {
+              return Center(child: Text("Lỗi: ${state.message}"));
+            }
+            return const SizedBox();
+          },
         ),
       ),
     );
