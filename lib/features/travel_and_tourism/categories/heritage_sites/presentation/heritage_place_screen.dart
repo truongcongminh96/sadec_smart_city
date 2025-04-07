@@ -5,6 +5,7 @@ import 'package:sadec_smart_city/features/travel_and_tourism/categories/heritage
 import 'package:sadec_smart_city/features/travel_and_tourism/categories/heritage_sites/presentation/widgets/heritage_app_bar.dart';
 import 'package:sadec_smart_city/features/travel_and_tourism/categories/heritage_sites/presentation/widgets/heritage_place_search.dart';
 import 'package:sadec_smart_city/features/travel_and_tourism/categories/heritage_sites/presentation/widgets/heritage_place_card.dart';
+import 'package:sadec_smart_city/features/travel_and_tourism/presentation/widgets/matcha_theme_wrapper.dart';
 import 'package:sadec_smart_city/shared/widgets/empty_state_widget.dart';
 
 class HeritagePlacesScreen extends StatelessWidget {
@@ -14,9 +15,12 @@ class HeritagePlacesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => HeritagePlaceCubit(getIt())..loadHeritagePlaces(menuAppId),
-      child: const HeritagePlacesView(),
+    return MatchaThemeWrapper(
+      child: BlocProvider(
+        create:
+            (_) => HeritagePlaceCubit(getIt())..loadHeritagePlaces(menuAppId),
+        child: const HeritagePlacesView(),
+      ),
     );
   }
 }
@@ -40,7 +44,7 @@ class _HeritagePlacesViewState extends State<HeritagePlacesView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: const HeritageAppBar(),
       body: Column(
         children: [

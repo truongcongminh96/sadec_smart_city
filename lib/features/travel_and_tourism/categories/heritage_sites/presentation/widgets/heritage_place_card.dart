@@ -63,6 +63,8 @@ class _HeritagePlaceCardState extends State<HeritagePlaceCard>
     final screenWidth = MediaQuery.of(context).size.width;
     final double titleFontSize =
         screenWidth >= 1024 ? 22 : (screenWidth >= 700 ? 20 : 18);
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 20),
@@ -78,7 +80,6 @@ class _HeritagePlaceCardState extends State<HeritagePlaceCard>
         borderRadius: BorderRadius.circular(24),
         child: Stack(
           children: [
-            // Logo + groupName
             Positioned(
               top: 16,
               left: 16,
@@ -91,7 +92,7 @@ class _HeritagePlaceCardState extends State<HeritagePlaceCard>
                   const SizedBox(width: 8),
                   Text(
                     place.groupName,
-                    style: const TextStyle(color: Colors.white),
+                    style: TextStyle(color: colorScheme.onSurface),
                   ),
                 ],
               ),
@@ -101,6 +102,7 @@ class _HeritagePlaceCardState extends State<HeritagePlaceCard>
               left: 16,
               right: 16,
               child: _buildBlurBlock(
+                context: context,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -109,7 +111,7 @@ class _HeritagePlaceCardState extends State<HeritagePlaceCard>
                       style: TextStyle(
                         fontSize: titleFontSize,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: colorScheme.onSurface,
                       ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -117,8 +119,8 @@ class _HeritagePlaceCardState extends State<HeritagePlaceCard>
                     const SizedBox(height: 4),
                     Text(
                       place.diaChi ?? 'Đang cập nhật',
-                      style: const TextStyle(
-                        color: Colors.white70,
+                      style: TextStyle(
+                        color: colorScheme.onSurface.withOpacity(0.7),
                         fontSize: 14,
                       ),
                       maxLines: 1,
@@ -128,8 +130,6 @@ class _HeritagePlaceCardState extends State<HeritagePlaceCard>
                 ),
               ),
             ),
-
-            // Info Box (Floating)
             Positioned(
               bottom: 12,
               left: 16,
@@ -137,19 +137,22 @@ class _HeritagePlaceCardState extends State<HeritagePlaceCard>
               child: Container(
                 height: 50,
                 decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.9),
+                  color: colorScheme.surface.withOpacity(0.9),
                   borderRadius: BorderRadius.circular(16),
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: const [
-                    Icon(Icons.favorite, color: Colors.red, size: 20),
-                    Text("120k"),
-                    Icon(Icons.comment, size: 20),
-                    Text("530"),
-                    Icon(Icons.share, size: 20),
-                    Text("22"),
+                  children: [
+                    const Icon(Icons.favorite, color: Colors.red, size: 20),
+                    Text(
+                      "120k",
+                      style: TextStyle(color: colorScheme.onSurface),
+                    ),
+                    const Icon(Icons.comment, size: 20),
+                    Text("530", style: TextStyle(color: colorScheme.onSurface)),
+                    const Icon(Icons.share, size: 20),
+                    Text("22", style: TextStyle(color: colorScheme.onSurface)),
                   ],
                 ),
               ),
@@ -160,7 +163,11 @@ class _HeritagePlaceCardState extends State<HeritagePlaceCard>
     );
   }
 
-  Widget _buildBlurBlock({required Widget child}) {
+  Widget _buildBlurBlock({
+    required BuildContext context,
+    required Widget child,
+  }) {
+    final theme = Theme.of(context);
     return ClipRRect(
       borderRadius: BorderRadius.circular(16),
       child: BackdropFilter(
@@ -168,7 +175,7 @@ class _HeritagePlaceCardState extends State<HeritagePlaceCard>
         child: Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: Colors.black.withValues(alpha: 0.4),
+            color: theme.colorScheme.surface.withOpacity(0.4),
             borderRadius: BorderRadius.circular(16),
           ),
           child: child,

@@ -27,6 +27,7 @@ class MatchaTheme {
         backgroundColor: isDarkMode ? darkBackground : background,
         elevation: 0,
         foregroundColor: isDarkMode ? darkText : text,
+        centerTitle: true,
       ),
       textTheme: (isDarkMode ? ThemeData.dark() : ThemeData.light()).textTheme
           .apply(

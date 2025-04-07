@@ -37,6 +37,9 @@ class _HeritagePlaceSearchState extends State<HeritagePlaceSearch> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: InkWell(
@@ -47,7 +50,7 @@ class _HeritagePlaceSearchState extends State<HeritagePlaceSearch> {
           padding: const EdgeInsets.symmetric(horizontal: 16),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30),
-            color: Colors.grey[100],
+            color: isDark ? Colors.grey[800] : Colors.grey[100],
             border: Border.all(
               color: _isFocused ? Colors.green : Colors.transparent,
               width: 1.5,
@@ -55,15 +58,19 @@ class _HeritagePlaceSearchState extends State<HeritagePlaceSearch> {
           ),
           child: Row(
             children: [
-              const Icon(Icons.search, color: Colors.grey),
+              Icon(Icons.search, color: isDark ? Colors.white54 : Colors.grey),
               const SizedBox(width: 8),
               Expanded(
                 child: TextField(
                   controller: _controller,
                   focusNode: _focusNode,
-                  decoration: const InputDecoration(
+                  style: TextStyle(color: theme.textTheme.bodyMedium?.color),
+                  decoration: InputDecoration(
                     hintText: "Tìm kiếm di tích, địa điểm...",
                     border: InputBorder.none,
+                    hintStyle: TextStyle(
+                      color: isDark ? Colors.white54 : Colors.grey,
+                    ),
                   ),
                   onChanged: (value) {
                     setState(() {});
@@ -83,7 +90,10 @@ class _HeritagePlaceSearchState extends State<HeritagePlaceSearch> {
                     setState(() {});
                     context.read<HeritagePlaceCubit>().searchHeritagePlaces('');
                   },
-                  child: const Icon(Icons.clear, color: Colors.grey),
+                  child: Icon(
+                    Icons.clear,
+                    color: isDark ? Colors.white54 : Colors.grey,
+                  ),
                 ),
             ],
           ),
