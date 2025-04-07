@@ -7,6 +7,7 @@ import 'package:sadec_smart_city/features/essential_services/categories/other_es
 import 'package:sadec_smart_city/features/essential_services/categories/public_wifi_spot/data/repositories/public_wifi_spot_repository.dart';
 import 'package:sadec_smart_city/features/essential_services/data/repositories/essential_services_repository.dart';
 import 'package:sadec_smart_city/features/transportation_services/data/repositories/transportation_services_repository.dart';
+import 'package:sadec_smart_city/features/travel_and_tourism/data/repositories/travel_and_tourism_repository.dart';
 
 final getIt = GetIt.instance;
 
@@ -37,5 +38,10 @@ Future<void> setupDI() async {
   // Transportation services
   getIt.registerLazySingleton<TransportationServicesRepository>(
     () => TransportationServicesRepository(getIt<ApiService>()),
+  );
+
+  // Travel And Tourism
+  getIt.registerLazySingleton<TravelAndTourismRepository>(
+    () => TravelAndTourismRepository(getIt<ApiService>()),
   );
 }

@@ -1,3 +1,5 @@
+import 'package:sadec_smart_city/features/travel_and_tourism/presentation/travel_and_tourism_screen.dart';
+
 import 'app_routes.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sadec_smart_city/features/essential_services/categories/automatic_teller_machine/presentation/automatic_teller_machine_screen.dart';
@@ -69,6 +71,14 @@ class AppRouter {
         builder: (context, state) {
           final menuAppId = state.extra as int;
           return TransportationServicesScreen(menuAppId: menuAppId);
+        },
+      ),
+      GoRoute(
+        path: AppRoutes.travelAndTourism,
+        name: AppRoutes.travelAndTourismName,
+        builder: (context, state) {
+          final menuAppId = state.extra as int;
+          return TravelAndTourismScreen(menuAppId: menuAppId);
         },
       ),
     ],

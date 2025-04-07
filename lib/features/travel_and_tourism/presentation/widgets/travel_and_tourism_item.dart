@@ -1,0 +1,127 @@
+import 'package:flutter/material.dart';
+import 'package:sadec_smart_city/core/theme/matcha_theme.dart';
+import 'package:sadec_smart_city/features/travel_and_tourism/data/models/travel_and_tourism_model.dart';
+
+class TravelAndTourismItem extends StatelessWidget {
+  final TravelAndTourismModel item;
+
+  const TravelAndTourismItem({super.key, required this.item});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: const [
+          BoxShadow(color: Colors.black12, blurRadius: 4, offset: Offset(0, 2)),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Stack(
+            alignment: Alignment.bottomCenter,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: Image.asset(
+                  'assets/images/ditichdisansadec.jpg',
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                  height: 200,
+                  errorBuilder:
+                      (_, __, ___) => Container(
+                        color: Colors.grey[300],
+                        height: 200,
+                        child: const Center(child: Icon(Icons.image)),
+                      ),
+                ),
+              ),
+              Positioned(
+                top: 12,
+                left: 24,
+                right: 24,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.black.withValues(alpha: 0.5),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Row(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(6),
+                        child: Image.network(
+                          item.icon,
+                          width: 24,
+                          height: 24,
+                          fit: BoxFit.cover,
+                          errorBuilder:
+                              (_, __, ___) => const Icon(
+                                Icons.image,
+                                size: 24,
+                                color: Colors.white,
+                              ),
+                        ),
+                      ),
+                      const SizedBox(width: 6),
+                      Expanded(
+                        child: Text(
+                          item.ten,
+                          style: MatchaTheme.titleStyle.copyWith(
+                            color: Colors.white,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Positioned(
+                bottom: 16,
+                left: 24,
+                right: 24,
+                child: Container(
+                  height: 50,
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.5),
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Icon(Icons.arrow_forward, color: Colors.white),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 10,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.green,
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        child: const Text(
+                          "Khám phá ngay!",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
