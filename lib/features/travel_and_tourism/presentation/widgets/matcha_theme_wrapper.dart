@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sadec_smart_city/core/theme/matcha_theme.dart';
+import 'package:sadec_smart_city/core/theme/theme_cubit.dart';
 
 class MatchaThemeWrapper extends StatelessWidget {
   final Widget child;
@@ -8,21 +10,9 @@ class MatchaThemeWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: Theme.of(context).copyWith(
-        scaffoldBackgroundColor: MatchaTheme.background,
-        primaryColor: MatchaTheme.primary,
-        textTheme: Theme.of(context).textTheme.apply(
-          bodyColor: MatchaTheme.text,
-          displayColor: MatchaTheme.text,
-        ),
-        appBarTheme: const AppBarTheme(
-          backgroundColor: MatchaTheme.background,
-          elevation: 0,
-          foregroundColor: MatchaTheme.text,
-        ),
-      ),
-      child: child,
-    );
+    final themeMode = context.watch<ThemeCubit>().state;
+    final isDark = themeMode == ThemeMode.dark;
+
+    return Theme(data: MatchaTheme.themeData(isDarkMode: isDark), child: child);
   }
 }

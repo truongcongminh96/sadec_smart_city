@@ -16,7 +16,10 @@ class HeritageAppBar extends StatelessWidget implements PreferredSizeWidget {
         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
       ),
       actions: const [Icon(Icons.filter, color: Colors.black)],
-      leading: const Icon(Icons.arrow_back_ios, color: Colors.black),
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
+        onPressed: () => Navigator.of(context).pop(),
+      ),
     );
   }
 }

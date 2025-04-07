@@ -102,7 +102,10 @@ class _TravelAndTourismItemState extends State<TravelAndTourismItem>
                   height: 200,
                   errorBuilder:
                       (_, __, ___) => Container(
-                        color: Colors.grey[300],
+                        color:
+                            Theme.of(
+                              context,
+                            ).colorScheme.surfaceContainerHighest,
                         height: 200,
                         child: const Center(child: Icon(Icons.image)),
                       ),
@@ -118,7 +121,9 @@ class _TravelAndTourismItemState extends State<TravelAndTourismItem>
                     vertical: 6,
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.black.withValues(alpha: 0.5),
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.surface.withValues(alpha: 0.7),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Row(
@@ -131,10 +136,10 @@ class _TravelAndTourismItemState extends State<TravelAndTourismItem>
                           height: 24,
                           fit: BoxFit.cover,
                           errorBuilder:
-                              (_, __, ___) => const Icon(
+                              (_, __, ___) => Icon(
                                 Icons.image,
                                 size: 24,
-                                color: Colors.white,
+                                color: Theme.of(context).colorScheme.onSurface,
                               ),
                         ),
                       ),
@@ -143,7 +148,7 @@ class _TravelAndTourismItemState extends State<TravelAndTourismItem>
                         child: Text(
                           item.ten,
                           style: MatchaTheme.titleStyle.copyWith(
-                            color: Colors.white,
+                            color: Theme.of(context).colorScheme.onSurface,
                           ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
@@ -169,7 +174,9 @@ class _TravelAndTourismItemState extends State<TravelAndTourismItem>
                       height: 50,
                       padding: const EdgeInsets.symmetric(horizontal: 8),
                       decoration: BoxDecoration(
-                        color: Colors.black.withValues(alpha: 0.5),
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.surface.withValues(alpha: 0.7),
                         borderRadius: BorderRadius.circular(30),
                       ),
                       child: Row(
@@ -182,14 +189,13 @@ class _TravelAndTourismItemState extends State<TravelAndTourismItem>
                               vertical: 10,
                             ),
                             decoration: BoxDecoration(
-                              color: Colors.green,
+                              color: Theme.of(context).primaryColor,
                               borderRadius: BorderRadius.circular(30),
                             ),
-                            child: const Text(
+                            child: Text(
                               "Khám phá ngay!",
                               style: TextStyle(
                                 color: Colors.white,
-                                fontWeight: FontWeight.w600,
                               ),
                             ),
                           ),

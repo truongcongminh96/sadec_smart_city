@@ -37,11 +37,7 @@ class TravelAndTourismHeader extends StatelessWidget
               borderRadius: BorderRadius.circular(50),
             ),
             child: IconButton(
-              icon: const Icon(
-                Icons.arrow_back_ios_new,
-                size: 18,
-                color: Colors.white,
-              ),
+              icon: Icon(Icons.arrow_back_ios_new, size: 18),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -58,10 +54,10 @@ class TravelAndTourismHeader extends StatelessWidget
               borderRadius: BorderRadius.circular(50),
               color: MatchaTheme.primary,
             ),
-            child: const Text(
+            child: Text(
               'Khám phá du lịch Sa Đéc',
               style: TextStyle(
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.surface,
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),

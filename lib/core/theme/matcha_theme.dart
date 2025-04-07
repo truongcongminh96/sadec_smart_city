@@ -7,24 +7,44 @@ class MatchaTheme {
   static const Color dark = Color(0xFF1B5E20);
   static const Color text = dark;
 
+  // Dark Theme
+  static const Color darkBackground = Color(0xFF121F1A);
+  static const Color darkPrimary = Color(0xFF66BB6A);
+  static const Color darkText = Color(0xFFE8F5E9);
+
   static const TextStyle titleStyle = TextStyle(
     fontSize: 20,
     fontWeight: FontWeight.bold,
     color: text,
   );
 
-  static ThemeData themeData(BuildContext context) {
-    return Theme.of(context).copyWith(
-      scaffoldBackgroundColor: background,
-      primaryColor: primary,
-      textTheme: Theme.of(
-        context,
-      ).textTheme.apply(bodyColor: text, displayColor: text),
-      appBarTheme: const AppBarTheme(
-        backgroundColor: background,
+  static ThemeData themeData({required bool isDarkMode}) {
+    return ThemeData(
+      brightness: isDarkMode ? Brightness.dark : Brightness.light,
+      scaffoldBackgroundColor: isDarkMode ? darkBackground : background,
+      primaryColor: isDarkMode ? darkPrimary : primary,
+      appBarTheme: AppBarTheme(
+        backgroundColor: isDarkMode ? darkBackground : background,
         elevation: 0,
-        foregroundColor: text,
+        foregroundColor: isDarkMode ? darkText : text,
       ),
+      textTheme: (isDarkMode ? ThemeData.dark() : ThemeData.light()).textTheme
+          .apply(
+            bodyColor: isDarkMode ? darkText : text,
+            displayColor: isDarkMode ? darkText : text,
+          ),
+      colorScheme:
+          isDarkMode
+              ? const ColorScheme.dark(
+                primary: darkPrimary,
+                onSurface: darkText,
+                surface: Color(0xFF1A2A25),
+              )
+              : const ColorScheme.light(
+                primary: primary,
+                onSurface: text,
+                surface: Colors.white,
+              ),
     );
   }
 }
