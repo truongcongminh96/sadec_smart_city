@@ -1,4 +1,4 @@
-class HeritagePlaceModel {
+class TourismPlaceModel {
   final String groupName;
   final int tableId;
   final int detailId;
@@ -10,7 +10,7 @@ class HeritagePlaceModel {
   final int stt;
   final int gps;
 
-  HeritagePlaceModel({
+  TourismPlaceModel({
     required this.groupName,
     required this.tableId,
     required this.detailId,
@@ -23,8 +23,8 @@ class HeritagePlaceModel {
     required this.gps,
   });
 
-  factory HeritagePlaceModel.fromJson(Map<String, dynamic> json) {
-    return HeritagePlaceModel(
+  factory TourismPlaceModel.fromJson(Map<String, dynamic> json) {
+    return TourismPlaceModel(
       groupName: json['groupName'] ?? '',
       tableId: json['tableId'] ?? 0,
       detailId: json['detailId'] ?? 0,

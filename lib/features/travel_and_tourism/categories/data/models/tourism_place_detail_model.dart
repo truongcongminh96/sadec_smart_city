@@ -1,4 +1,4 @@
-class HeritagePlaceDetailModel {
+class TourismPlaceDetailModel {
   final int tableId;
   final int detailId;
   final String? ten;
@@ -24,7 +24,7 @@ class HeritagePlaceDetailModel {
   final String? gpsLat;
   final String? stt;
 
-  HeritagePlaceDetailModel({
+  TourismPlaceDetailModel({
     required this.tableId,
     required this.detailId,
     this.ten,
@@ -51,8 +51,8 @@ class HeritagePlaceDetailModel {
     this.stt,
   });
 
-  factory HeritagePlaceDetailModel.fromJson(Map<String, dynamic> json) {
-    return HeritagePlaceDetailModel(
+  factory TourismPlaceDetailModel.fromJson(Map<String, dynamic> json) {
+    return TourismPlaceDetailModel(
       tableId: json['tableId'],
       detailId: json['detailId'],
       ten: json['ten'],

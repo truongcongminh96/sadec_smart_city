@@ -1,14 +1,14 @@
-class HeritagePlaceImageModel {
+class TourismPlaceImageModel {
   final String linkHinhAnh;
   final String tenFileHinhAnh;
 
-  HeritagePlaceImageModel({
+  TourismPlaceImageModel({
     required this.linkHinhAnh,
     required this.tenFileHinhAnh,
   });
 
-  factory HeritagePlaceImageModel.fromJson(Map<String, dynamic> json) {
-    return HeritagePlaceImageModel(
+  factory TourismPlaceImageModel.fromJson(Map<String, dynamic> json) {
+    return TourismPlaceImageModel(
       linkHinhAnh: json['linkHinhAnh'],
       tenFileHinhAnh: json['tenFileHinhAnh'],
     );

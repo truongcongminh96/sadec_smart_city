@@ -1,20 +1,20 @@
 import 'package:sadec_smart_city/core/network/api_service.dart';
-import 'package:sadec_smart_city/features/travel_and_tourism/categories/heritage_sites/data/models/heritage_place_detail_model.dart';
-import 'package:sadec_smart_city/features/travel_and_tourism/categories/heritage_sites/data/models/heritage_place_image_model.dart';
+import 'package:sadec_smart_city/features/travel_and_tourism/categories/data/models/tourism_place_detail_model.dart';
+import 'package:sadec_smart_city/features/travel_and_tourism/categories/data/models/tourism_place_image_model.dart';
 
-class HeritagePlaceDetailRepository {
+class TourismPlaceDetailRepository {
   final ApiService _api;
 
-  HeritagePlaceDetailRepository(this._api);
+  TourismPlaceDetailRepository(this._api);
 
   Future<
     ({
       Map<String, dynamic> template,
-      HeritagePlaceDetailModel realData,
-      List<HeritagePlaceImageModel> images,
+      TourismPlaceDetailModel realData,
+      List<TourismPlaceImageModel> images,
     })
   >
-  getDetailHeritagePlace(int tableId, int detailId) async {
+  getDetailTourismPlace(int tableId, int detailId) async {
     final jsonData = await _api.postData({
       "actionCode": 3,
       "tableId": tableId,
@@ -30,9 +30,9 @@ class HeritagePlaceDetailRepository {
     }
 
     final template = detailList[0] as Map<String, dynamic>;
-    final realData = HeritagePlaceDetailModel.fromJson(detailList[1]);
+    final realData = TourismPlaceDetailModel.fromJson(detailList[1]);
     final images =
-        imageList.map((e) => HeritagePlaceImageModel.fromJson(e)).toList();
+        imageList.map((e) => TourismPlaceImageModel.fromJson(e)).toList();
 
     return (template: template, realData: realData, images: images);
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sadec_smart_city/features/travel_and_tourism/categories/heritage_sites/data/models/heritage_place_image_model.dart';
+import 'package:sadec_smart_city/features/travel_and_tourism/categories/data/models/tourism_place_image_model.dart';
 
 class HeritagePlaceImageSlider extends StatelessWidget {
   const HeritagePlaceImageSlider({
@@ -8,7 +8,7 @@ class HeritagePlaceImageSlider extends StatelessWidget {
     required this.selectedImageIndex,
   });
 
-  final List<HeritagePlaceImageModel> images;
+  final List<TourismPlaceImageModel> images;
   final int selectedImageIndex;
 
   @override

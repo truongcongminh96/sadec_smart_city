@@ -1,10 +1,10 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:sadec_smart_city/features/travel_and_tourism/categories/heritage_sites/data/models/heritage_place_model.dart';
+import 'package:sadec_smart_city/features/travel_and_tourism/categories/data/models/tourism_place_model.dart';
 import 'package:sadec_smart_city/shared/utils/navigation_helper.dart';
 
 class HeritagePlaceCard extends StatefulWidget {
-  final HeritagePlaceModel place;
+  final TourismPlaceModel place;
 
   const HeritagePlaceCard({super.key, required this.place});
 

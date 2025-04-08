@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:sadec_smart_city/features/travel_and_tourism/categories/heritage_sites/data/models/heritage_place_detail_model.dart';
+import 'package:sadec_smart_city/features/travel_and_tourism/categories/data/models/tourism_place_detail_model.dart';
 
 class HeritagePlaceHeader extends StatelessWidget {
   const HeritagePlaceHeader({super.key, required this.place});
 
-  final HeritagePlaceDetailModel place;
+  final TourismPlaceDetailModel place;
 
   @override
   Widget build(BuildContext context) {

@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sadec_smart_city/features/travel_and_tourism/categories/heritage_sites/data/models/heritage_place_model.dart';
-import 'package:sadec_smart_city/features/travel_and_tourism/categories/heritage_sites/data/repositories/heritage_place_repository.dart';
+import 'package:sadec_smart_city/features/travel_and_tourism/categories/data/models/tourism_place_model.dart';
+import 'package:sadec_smart_city/features/travel_and_tourism/categories/data/repositories/tourism_place_repository.dart';
 
 part 'heritage_place_state.dart';
 
 class HeritagePlaceCubit extends Cubit<HeritagePlaceState> {
   HeritagePlaceCubit(this._repository) : super(HeritagePlaceInitial());
 
-  final HeritagePlaceRepository _repository;
+  final TourismPlaceRepository _repository;
 
   Future<void> loadHeritagePlaces(int menuAppId) async {
     emit(HeritagePlaceLoading());
     try {
-      final heritagePlaces = await _repository.fetchHeritagePlaces(menuAppId);
+      final heritagePlaces = await _repository.fetchTourismPlaces(menuAppId);
       emit(
         HeritagePlaceLoaded(
           heritagePlaces: heritagePlaces,

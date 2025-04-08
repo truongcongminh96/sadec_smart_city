@@ -8,9 +8,9 @@ final class HeritagePlaceDetailInitial extends HeritagePlaceDetailState {}
 class HeritagePlaceDetailLoading extends HeritagePlaceDetailState {}
 
 class HeritagePlaceDetailLoaded extends HeritagePlaceDetailState {
-  final HeritagePlaceDetailModel data;
+  final TourismPlaceDetailModel data;
   final Map<String, String?> mappedFields;
-  final List<HeritagePlaceImageModel> images;
+  final List<TourismPlaceImageModel> images;
 
   HeritagePlaceDetailLoaded({
     required this.data,

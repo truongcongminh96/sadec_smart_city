@@ -8,8 +8,8 @@ final class HeritagePlaceInitial extends HeritagePlaceState {}
 class HeritagePlaceLoading extends HeritagePlaceState {}
 
 class HeritagePlaceLoaded extends HeritagePlaceState {
-  final List<HeritagePlaceModel> heritagePlaces;
-  final List<HeritagePlaceModel> allHeritagePlaces;
+  final List<TourismPlaceModel> heritagePlaces;
+  final List<TourismPlaceModel> allHeritagePlaces;
 
   HeritagePlaceLoaded({
     required this.heritagePlaces,
