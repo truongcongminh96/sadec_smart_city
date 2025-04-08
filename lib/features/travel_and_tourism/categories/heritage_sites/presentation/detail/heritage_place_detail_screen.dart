@@ -58,12 +58,13 @@ class _HeritagePlaceDetailScreenState extends State<HeritagePlaceDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create:
-          (_) =>
-              HeritagePlaceDetailCubit(getIt())
-                ..loadDetailHeritagePlace(widget.tableId, widget.detailId),
-      child: MatchaThemeWrapper(
+    return MatchaThemeWrapper(
+      child: BlocProvider(
+        create:
+            (_) =>
+                HeritagePlaceDetailCubit(getIt())
+                  ..loadDetailHeritagePlace(widget.tableId, widget.detailId),
+
         child: BlocBuilder<HeritagePlaceDetailCubit, HeritagePlaceDetailState>(
           builder: (context, state) {
             if (state is HeritagePlaceDetailLoading) {
@@ -131,7 +132,9 @@ class _HeritagePlaceDetailScreenState extends State<HeritagePlaceDetailScreen> {
                                           itemCount: images.length,
                                           itemBuilder: (_, index) {
                                             final isSelected =
-                                                index == selectedImageIndex;
+                                                index ==
+                                                (selectedImageIndex %
+                                                    images.length);
                                             return GestureDetector(
                                               onTap:
                                                   () => _onUserTapImage(index),

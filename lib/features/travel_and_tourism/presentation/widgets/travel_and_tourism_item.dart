@@ -182,7 +182,10 @@ class _TravelAndTourismItemState extends State<TravelAndTourismItem>
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Icon(Icons.arrow_forward, color: Colors.white),
+                          Icon(
+                            Icons.arrow_forward,
+                            color: Theme.of(context).colorScheme.onSurface,
+                          ),
                           Container(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 20,
@@ -194,9 +197,7 @@ class _TravelAndTourismItemState extends State<TravelAndTourismItem>
                             ),
                             child: Text(
                               "Khám phá ngay!",
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
+                              style: TextStyle(color: Colors.white),
                             ),
                           ),
                         ],
