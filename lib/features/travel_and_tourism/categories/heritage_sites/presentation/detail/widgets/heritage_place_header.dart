@@ -8,15 +8,18 @@ class HeritagePlaceHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           place.ten ?? 'Đang cập nhật',
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 26,
             fontWeight: FontWeight.bold,
-            color: Colors.white,
+            color: colorScheme.onSurface,
           ),
         ),
         const SizedBox(height: 8),
@@ -26,7 +29,7 @@ class HeritagePlaceHeader extends StatelessWidget {
             const SizedBox(width: 4),
             Text(
               place.diaChi ?? '',
-              style: const TextStyle(color: Colors.white70),
+              style: TextStyle(color: colorScheme.onSurface),
             ),
           ],
         ),

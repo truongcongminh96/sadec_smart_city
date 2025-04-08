@@ -33,7 +33,7 @@ class HeritagePlaceImageSlider extends StatelessWidget {
         child: Image.network(
           images[selectedImageIndex % images.length].linkHinhAnh,
           key: ValueKey(images[selectedImageIndex % images.length].linkHinhAnh),
-          height: 300,
+          height: 200,
           width: double.infinity,
           fit: BoxFit.cover,
         ),

@@ -13,6 +13,9 @@ class HeritagePlaceTabContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return DefaultTabController(
       length: 2,
       child: Column(
@@ -30,7 +33,7 @@ class HeritagePlaceTabContent extends StatelessWidget {
                     data: gioiThieu ?? '<p>Chưa có nội dung giới thiệu.</p>',
                     style: {
                       "body": Style(
-                        color: Colors.white,
+                        color: colorScheme.onSurface,
                         fontSize: FontSize(16),
                         lineHeight: LineHeight(1.5),
                         fontFamily: 'Arial',
@@ -58,16 +61,16 @@ class HeritagePlaceTabContent extends StatelessWidget {
                                   children: [
                                     Text(
                                       '${entry.key}: ',
-                                      style: const TextStyle(
-                                        color: Colors.white70,
+                                      style: TextStyle(
+                                        color: colorScheme.onSurface,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
                                     Expanded(
                                       child: Text(
                                         entry.value ?? '—',
-                                        style: const TextStyle(
-                                          color: Colors.white,
+                                        style: TextStyle(
+                                          color: colorScheme.onSurface,
                                         ),
                                       ),
                                     ),
