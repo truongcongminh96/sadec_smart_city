@@ -14,7 +14,7 @@ class HeritageAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       elevation: 0,
       backgroundColor:
-          theme.appBarTheme.backgroundColor ?? theme.colorScheme.background,
+          theme.appBarTheme.backgroundColor ?? theme.colorScheme.surface,
       title: Text(
         'Discover.',
         style: TextStyle(

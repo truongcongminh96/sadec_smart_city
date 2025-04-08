@@ -7,6 +7,7 @@ import 'package:sadec_smart_city/features/essential_services/categories/other_es
 import 'package:sadec_smart_city/features/essential_services/categories/public_wifi_spot/data/repositories/public_wifi_spot_repository.dart';
 import 'package:sadec_smart_city/features/essential_services/data/repositories/essential_services_repository.dart';
 import 'package:sadec_smart_city/features/transportation_services/data/repositories/transportation_services_repository.dart';
+import 'package:sadec_smart_city/features/travel_and_tourism/categories/heritage_sites/data/repositories/heritage_place_detail_repository.dart';
 import 'package:sadec_smart_city/features/travel_and_tourism/categories/heritage_sites/data/repositories/heritage_place_repository.dart';
 import 'package:sadec_smart_city/features/travel_and_tourism/data/repositories/travel_and_tourism_repository.dart';
 
@@ -47,5 +48,8 @@ Future<void> setupDI() async {
   );
   getIt.registerLazySingleton<HeritagePlaceRepository>(
     () => HeritagePlaceRepository(getIt<ApiService>()),
+  );
+  getIt.registerLazySingleton<HeritagePlaceDetailRepository>(
+    () => HeritagePlaceDetailRepository(getIt<ApiService>()),
   );
 }

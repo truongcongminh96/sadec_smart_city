@@ -121,7 +121,7 @@ class _HeritagePlaceCardState extends State<HeritagePlaceCard>
                     Text(
                       place.diaChi ?? 'Đang cập nhật',
                       style: TextStyle(
-                        color: colorScheme.onSurface.withOpacity(0.7),
+                        color: colorScheme.onSurface.withValues(alpha: 0.7),
                         fontSize: 14,
                       ),
                       maxLines: 1,
@@ -185,7 +185,7 @@ class _HeritagePlaceCardState extends State<HeritagePlaceCard>
         child: Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: theme.colorScheme.surface.withOpacity(0.4),
+            color: theme.colorScheme.surface.withValues(alpha: 0.4),
             borderRadius: BorderRadius.circular(16),
           ),
           child: child,

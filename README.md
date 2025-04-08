@@ -1,6 +1,7 @@
 # Sa Đéc SmartCity App
 
-A modern mobile application built with Flutter to support citizens of Sa Đéc city in connecting with local government services, public utilities, and urban features in a smart and convenient way.
+A modern mobile application built with Flutter to support citizens of Sa Đéc city in connecting with
+local government services, public utilities, and urban features in a smart and convenient way.
 
 ---
 
@@ -49,16 +50,27 @@ lib/
 ## 🚀 Getting Started
 
 ### 1. Install dependencies:
+
 ```bash
 flutter pub get
 ```
 
 ### 2. Run app:
+
 ```bash
 flutter run
 ```
 
 ### 3. Build APK:
+
+#Set true when running on real devices
+
+```bash
+<meta-data
+            android:name="io.flutter.embedding.android.EnableImpeller"
+            android:value="false" />
+```
+
 ```bash
 flutter build apk
 ```
@@ -75,7 +87,8 @@ flutter build apk
 
 ## 🤝 Contribution
 
-Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
+Pull requests are welcome! For major changes, please open an issue first to discuss what you would
+like to change.
 
 ---
 
