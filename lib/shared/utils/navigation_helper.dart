@@ -32,6 +32,9 @@ class NavigationHelper {
       case 78:
         context.pushNamed(AppRoutes.heritagePlaceName, extra: menuAppId);
         break;
+      case 79:
+        context.pushNamed(AppRoutes.tourismAttractionName, extra: menuAppId);
+        break;
       case 102:
         context.pushNamed(AppRoutes.bankName, extra: menuAppId);
         break;
@@ -52,6 +55,10 @@ class NavigationHelper {
   }) {
     context.pushNamed(
       AppRoutes.heritagePlaceDetailName,
+      extra: {'tableId': tableId, 'detailId': detailId},
+    );
+    context.pushNamed(
+      AppRoutes.tourismAttractionDetailName,
       extra: {'tableId': tableId, 'detailId': detailId},
     );
   }

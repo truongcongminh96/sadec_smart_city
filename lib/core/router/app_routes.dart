@@ -9,6 +9,7 @@ class AppRoutes {
   static const fuelStation = '/essential-services/fuel-station';
   static const publicWifiSpot = '/essential-services/public-wifi-spot';
   static const heritagePlace = '/travel-and-tourism/heritage-place';
+  static const tourismAttraction = '/travel-and-tourism/tourism-attraction';
 
   static const homeName = 'home';
   static const reportName = 'report';
@@ -25,4 +26,8 @@ class AppRoutes {
   static const heritagePlaceName = 'heritage-place';
   static const heritagePlaceDetail = '/travel-and-tourism/heritage-place/detail';
   static const heritagePlaceDetailName = 'heritage-place-detail';
+
+  static const tourismAttractionName = 'tourism-attraction';
+  static const tourismAttractionDetail = '/travel-and-tourism/tourism-attraction/detail';
+  static const tourismAttractionDetailName = 'tourism-attraction-detail';
 }

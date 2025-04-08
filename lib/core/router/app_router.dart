@@ -11,6 +11,8 @@ import 'package:sadec_smart_city/features/transportation_services/presentation/t
 import 'package:sadec_smart_city/features/travel_and_tourism/categories/heritage_sites/presentation/heritage_place_screen.dart';
 import 'package:sadec_smart_city/features/travel_and_tourism/presentation/travel_and_tourism_screen.dart';
 import 'package:sadec_smart_city/features/travel_and_tourism/categories/heritage_sites/presentation/detail/heritage_place_detail_screen.dart';
+import 'package:sadec_smart_city/features/travel_and_tourism/categories/tourist_attractions/presentation/detail/tourism_attraction_detail_screen.dart';
+import 'package:sadec_smart_city/features/travel_and_tourism/categories/tourist_attractions/presentation/tourism_attraction_screen.dart';
 
 class AppRouter {
   static final router = GoRouter(
@@ -99,6 +101,28 @@ class AppRouter {
           final tableId = args['tableId'] as int;
 
           return HeritagePlaceDetailScreen(
+            tableId: tableId,
+            detailId: detailId,
+          );
+        },
+      ),
+      GoRoute(
+        path: AppRoutes.tourismAttraction,
+        name: AppRoutes.tourismAttractionName,
+        builder: (context, state) {
+          final menuAppId = state.extra as int;
+          return TourismAttractionScreen(menuAppId: menuAppId);
+        },
+      ),
+      GoRoute(
+        path: AppRoutes.tourismAttractionDetail,
+        name: AppRoutes.tourismAttractionDetailName,
+        builder: (context, state) {
+          final args = state.extra as Map<String, dynamic>;
+          final detailId = args['detailId'] as int;
+          final tableId = args['tableId'] as int;
+
+          return TourismAttractionDetailScreen(
             tableId: tableId,
             detailId: detailId,
           );
