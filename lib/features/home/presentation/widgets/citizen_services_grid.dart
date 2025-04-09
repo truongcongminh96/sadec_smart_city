@@ -51,10 +51,7 @@ class CitizenServicesGrid extends StatelessWidget {
                   ),
                 );
               } else {
-                NavigationHelper.handleMenuTapWithMenuAppId(
-                  context,
-                  item.menuAppId,
-                );
+                NavigationHelper.handleMenuTap(context, item);
               }
             },
             child: Column(
