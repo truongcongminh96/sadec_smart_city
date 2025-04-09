@@ -1,5 +1,5 @@
-import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sadec_smart_city/features/detail_information/data/models/detail_information_image_model.dart';
 import 'package:sadec_smart_city/features/detail_information/data/models/detail_information_model.dart';
 import 'package:sadec_smart_city/features/detail_information/data/repositories/detail_information_repository.dart';

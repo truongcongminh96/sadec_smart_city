@@ -48,7 +48,7 @@ class ListDetailCategoryCard extends StatelessWidget {
             children: [
               Flexible(
                 child: Text(
-                  detailCategory.ten ?? "Đang cập nhật",
+                  detailCategory.ten,
                   style: TextStyle(
                     color: textColor,
                     fontWeight: FontWeight.bold,
