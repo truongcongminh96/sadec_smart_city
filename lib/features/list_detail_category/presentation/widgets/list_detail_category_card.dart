@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:sadec_smart_city/features/list_detail_category/data/models/list_detail_category_model.dart';
 import 'package:sadec_smart_city/shared/utils/navigation_helper.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ListDetailCategoryCard extends StatefulWidget {
   const ListDetailCategoryCard({super.key, required this.detailCategory});
@@ -72,10 +73,7 @@ class _ListDetailCategoryCardState extends State<ListDetailCategoryCard>
       height: 260,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
-        image: const DecorationImage(
-          image: AssetImage('assets/images/dulichsadec.jpg'),
-          fit: BoxFit.cover,
-        ),
+        color: Theme.of(context).colorScheme.surfaceContainerHighest,
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(24),
@@ -142,25 +140,92 @@ class _ListDetailCategoryCardState extends State<ListDetailCategoryCard>
                       tableId: widget.detailCategory.tableId,
                       detailId: widget.detailCategory.detailId,
                     ),
-                child: Container(
+                child: SizedBox(
                   height: 50,
-                  decoration: BoxDecoration(
-                    color: colorScheme.surface.withValues(alpha: 0.9),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      const Icon(Icons.favorite, color: Colors.red, size: 20),
-                      Text(
-                        "${place.detailId + place.tableId} Lượt thích",
-                        style: TextStyle(color: colorScheme.onSurface),
+                      Expanded(
+                        child: GestureDetector(
+                          onTap:
+                              () =>
+                                  NavigationHelper.handleDetailTapWithTableIdAnDetailId(
+                                    context,
+                                    tableId: widget.detailCategory.tableId,
+                                    detailId: widget.detailCategory.detailId,
+                                  ),
+                          child: Container(
+                            height: 40,
+                            margin: const EdgeInsets.only(right: 8),
+                            decoration: BoxDecoration(
+                              color: Colors.white.withValues(alpha: 0.7),
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                Icon(
+                                  Icons.favorite,
+                                  color: Colors.red,
+                                  size: 18,
+                                ),
+                                SizedBox(width: 6),
+                                Text(
+                                  "Xem chi tiết",
+                                  style: TextStyle(fontWeight: FontWeight.w500),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
                       ),
-                      const Icon(Icons.filter, size: 20),
-                      Text(
-                        "Xem chi tiết",
-                        style: TextStyle(color: colorScheme.onSurface),
+
+                      // Nút Bản đồ
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () async {
+                            final url = Uri.parse(
+                              'https://www.google.com/maps/search/?api=1&query=${widget.detailCategory.gpsLat},${widget.detailCategory.gpsLong}',
+                            );
+                            if (await canLaunchUrl(url)) {
+                              await launchUrl(
+                                url,
+                                mode: LaunchMode.externalApplication,
+                              );
+                            } else {
+                              if (!context.mounted) return;
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Không thể mở Google Maps'),
+                                ),
+                              );
+                            }
+                          },
+                          child: Container(
+                            height: 40,
+                            margin: const EdgeInsets.only(left: 8),
+                            decoration: BoxDecoration(
+                              color: Colors.white.withValues(alpha: 0.7),
+                              borderRadius: BorderRadius.circular(24),
+                            ),
+
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                Icon(
+                                  Icons.location_on,
+                                  color: Colors.black87,
+                                  size: 18,
+                                ),
+                                SizedBox(width: 6),
+                                Text(
+                                  "Bản đồ",
+                                  style: TextStyle(fontWeight: FontWeight.w500),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
                       ),
                     ],
                   ),
