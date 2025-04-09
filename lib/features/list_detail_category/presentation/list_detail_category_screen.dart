@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:sadec_smart_city/core/di/injector.dart';
 import 'package:sadec_smart_city/features/category_services/data/models/category_service_model.dart';
 import 'package:sadec_smart_city/features/list_detail_category/data/repository/list_detail_category_repository.dart';
@@ -21,10 +20,12 @@ class ListDetailCategoryScreen extends StatefulWidget {
 
 class _ListDetailCategoryScreenState extends State<ListDetailCategoryScreen> {
   final TextEditingController _searchController = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void dispose() {
     _searchController.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -60,26 +61,29 @@ class _ListDetailCategoryScreenState extends State<ListDetailCategoryScreen> {
                   subtitle: "Hãy thử lại với từ khóa khác nhé!",
                 );
               }
-              return AnimationLimiter(
-                child: ListView.builder(
-                  padding: const EdgeInsets.all(12),
-                  itemCount: listDetailCategory.length,
-                  itemBuilder: (context, index) {
-                    final detailCategory = listDetailCategory[index];
-                    return AnimationConfiguration.staggeredList(
-                      position: index,
-                      duration: const Duration(milliseconds: 500),
-                      child: SlideAnimation(
-                        verticalOffset: 50.0,
-                        child: FadeInAnimation(
-                          child: ListDetailCategoryCard(
-                            detailCategory: detailCategory,
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
+              return LayoutBuilder(
+                builder: (context, constraints) {
+                  final width = constraints.maxWidth;
+                  final crossAxisCount =
+                      width >= 1024 ? 4 : (width >= 700 ? 2 : 1);
+
+                  return GridView.builder(
+                    controller: _scrollController,
+                    padding: const EdgeInsets.all(16),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: crossAxisCount,
+                      mainAxisSpacing: 16,
+                      crossAxisSpacing: 16,
+                      mainAxisExtent: 260,
+                    ),
+                    itemCount: listDetailCategory.length,
+                    itemBuilder: (context, index) {
+                      return ListDetailCategoryCard(
+                        detailCategory: listDetailCategory[index],
+                      );
+                    },
+                  );
+                },
               );
             }
             if (state is ListDetailCategoryError) {

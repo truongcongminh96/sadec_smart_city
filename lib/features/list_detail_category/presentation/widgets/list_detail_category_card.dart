@@ -1,157 +1,195 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:sadec_smart_city/features/list_detail_category/data/models/list_detail_category_model.dart';
-import 'package:sadec_smart_city/shared/utils/call_helper.dart';
 import 'package:sadec_smart_city/shared/utils/navigation_helper.dart';
-import 'package:url_launcher/url_launcher.dart';
 
-class ListDetailCategoryCard extends StatelessWidget {
+class ListDetailCategoryCard extends StatefulWidget {
   const ListDetailCategoryCard({super.key, required this.detailCategory});
 
   final ListDetailCategoryModel detailCategory;
 
   @override
+  State<ListDetailCategoryCard> createState() => _ListDetailCategoryCardState();
+}
+
+class _ListDetailCategoryCardState extends State<ListDetailCategoryCard>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<Offset> _offsetAnimation;
+  late Animation<double> _opacityAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 500),
+      vsync: this,
+    );
+
+    _offsetAnimation = Tween<Offset>(
+      begin: const Offset(0, 0.2),
+      end: Offset.zero,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
+
+    _opacityAnimation = Tween<double>(
+      begin: 0,
+      end: 1,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
+
+    Future.delayed(const Duration(milliseconds: 100), () {
+      if (mounted) _controller.forward();
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    return FadeTransition(
+      opacity: _opacityAnimation,
+      child: SlideTransition(
+        position: _offsetAnimation,
+        child: _buildCard(context),
+      ),
+    );
+  }
 
-    final gradientColors =
-        isDark
-            ? [
-              const Color(0xFF0F2027),
-              const Color(0xFF203A43),
-              const Color(0xFF2C5364),
-            ]
-            : [const Color(0xFF8E2DE2), const Color(0xFF4A00E0)];
-
-    final Color textColor = Colors.white;
-    final Color subTextColor = Colors.white70;
-    final Color accentColor = isDark ? Colors.amber : Colors.greenAccent;
+  Widget _buildCard(BuildContext context) {
+    final place = widget.detailCategory;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final double titleFontSize =
+        screenWidth >= 1024 ? 22 : (screenWidth >= 700 ? 20 : 18);
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
     return Container(
-      margin: const EdgeInsets.only(bottom: 16),
-      padding: const EdgeInsets.all(20),
+      margin: const EdgeInsets.only(bottom: 20),
+      height: 260,
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: gradientColors,
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
+        borderRadius: BorderRadius.circular(24),
+        image: const DecorationImage(
+          image: AssetImage('assets/images/dulichsadec.jpg'),
+          fit: BoxFit.cover,
         ),
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: const [
-          BoxShadow(color: Colors.black26, blurRadius: 6, offset: Offset(0, 4)),
-        ],
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Flexible(
-                child: Text(
-                  detailCategory.ten,
-                  style: TextStyle(
-                    color: textColor,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
-                ),
-              ),
-              Icon(Icons.wifi, color: subTextColor, size: 20),
-            ],
-          ),
-          const SizedBox(height: 16),
-          Row(
-            children: [
-              IconButton(
-                icon: Icon(Icons.call, color: accentColor, size: 30),
-                onPressed:
-                    () => CallHelper.openPhone(context, detailCategory.sdt),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: Text(
-                  detailCategory.sdt ?? "Không có số",
-                  style: TextStyle(
-                    letterSpacing: 2,
-                    fontSize: 18,
-                    color: textColor,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          Text(
-            detailCategory.diaChi ?? "Địa chỉ đang cập nhật",
-            style: TextStyle(color: subTextColor, fontSize: 13),
-          ),
-          const SizedBox(height: 15),
-          if (detailCategory.gpsLat != null && detailCategory.gpsLong != null)
-            Align(
-              alignment: Alignment.centerRight,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(24),
+        child: Stack(
+          children: [
+            Positioned(
+              top: 16,
+              left: 16,
               child: Row(
                 children: [
-                  TextButton.icon(
-                    onPressed:
-                        () =>
-                            NavigationHelper.handleDetailTapWithTableIdAnDetailId(
-                              context,
-                              tableId: detailCategory.tableId,
-                              detailId: detailCategory.detailId,
-                            ),
-                    icon: Icon(Icons.filter, color: accentColor),
-                    label: Text(
-                      "Xem chi tiết",
-                      style: TextStyle(color: accentColor),
-                    ),
-                    style: TextButton.styleFrom(
-                      side: BorderSide(color: accentColor, width: 1.5),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 6,
-                      ),
-                    ),
+                  const CircleAvatar(
+                    radius: 16,
+                    backgroundImage: AssetImage('assets/images/logo_sdc.png'),
                   ),
-                  SizedBox(width: 20),
-                  TextButton.icon(
-                    onPressed: () async {
-                      final url = Uri.parse(
-                        'https://www.google.com/maps/search/?api=1&query=${detailCategory.gpsLat},${detailCategory.gpsLong}',
-                      );
-                      if (await canLaunchUrl(url)) {
-                        await launchUrl(
-                          url,
-                          mode: LaunchMode.externalApplication,
-                        );
-                      } else {
-                        if (!context.mounted) return;
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Không thể mở Google Maps'),
-                          ),
-                        );
-                      }
-                    },
-                    icon: Icon(Icons.location_pin, color: accentColor),
-                    label: Text("Bản đồ", style: TextStyle(color: accentColor)),
-                    style: TextButton.styleFrom(
-                      side: BorderSide(color: accentColor, width: 1.5),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 6,
-                      ),
-                    ),
+                  const SizedBox(width: 8),
+                  Text(
+                    place.groupName,
+                    style: TextStyle(color: colorScheme.onSurface),
                   ),
                 ],
               ),
             ),
-        ],
+            Positioned(
+              bottom: 80,
+              left: 16,
+              right: 16,
+              child: _buildBlurBlock(
+                context: context,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      place.ten,
+                      style: TextStyle(
+                        fontSize: titleFontSize,
+                        fontWeight: FontWeight.bold,
+                        color: colorScheme.onSurface,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      place.diaChi ?? 'Đang cập nhật',
+                      style: TextStyle(
+                        color: colorScheme.onSurface.withValues(alpha: 0.7),
+                        fontSize: 14,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: 12,
+              left: 16,
+              right: 16,
+              child: GestureDetector(
+                onTap:
+                    () => NavigationHelper.handleDetailTapWithTableIdAnDetailId(
+                      context,
+                      tableId: widget.detailCategory.tableId,
+                      detailId: widget.detailCategory.detailId,
+                    ),
+                child: Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: colorScheme.surface.withValues(alpha: 0.9),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      const Icon(Icons.favorite, color: Colors.red, size: 20),
+                      Text(
+                        "${place.detailId + place.tableId} Lượt thích",
+                        style: TextStyle(color: colorScheme.onSurface),
+                      ),
+                      const Icon(Icons.filter, size: 20),
+                      Text(
+                        "Xem chi tiết",
+                        style: TextStyle(color: colorScheme.onSurface),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildBlurBlock({
+    required BuildContext context,
+    required Widget child,
+  }) {
+    final theme = Theme.of(context);
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(16),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+        child: Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: theme.colorScheme.surface.withValues(alpha: 0.4),
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: child,
+        ),
       ),
     );
   }
