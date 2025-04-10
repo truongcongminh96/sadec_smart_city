@@ -7,9 +7,10 @@ class SliderBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<String> images = [
-      'https://scontent.iocvnpt.com/resources/portal/Images/DTP/superadminportal.dtp/trangchu/portal/slider/cd12_262_cong_vien_sadec_thuy_ban_636932879.jpg',
-      'https://scontent.iocvnpt.com/resources/portal/Images/DTP/dtblieu/anh_bia/thap_muoi_que_huong_513958281.jpg',
-      'https://scontent.iocvnpt.com/resources/portal/Images/DTP/superadminportal.dtp/trangchu/portal/slider/cd09_112_ngay_hoi_xuan_3_532255319.jpg',
+      'assets/images/dulichsadec.jpg',
+      'assets/images/slider_1.jpg',
+      'assets/images/slider_2.jpg',
+      'assets/images/slider_3.jpg',
     ];
 
     return Container(
@@ -36,7 +37,7 @@ class SliderBanner extends StatelessWidget {
                         child: SizedBox(
                           width: double.infinity,
                           height: 200,
-                          child: Image.network(imgUrl, fit: BoxFit.cover),
+                          child: Image.asset(imgUrl, fit: BoxFit.cover),
                         ),
                       ),
                     )

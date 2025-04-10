@@ -8,70 +8,122 @@ class MainNavigationLayout extends StatelessWidget {
 
   const MainNavigationLayout({super.key, required this.child});
 
-  static const tabs = ['/home', '/report'];
-  static const navIndexMap = {'/home': 0, '/report': 1};
+  static const tabs = ['/home', '/notifications', '/events', '/profile'];
+
+  static const navIndexMap = {
+    '/home': 0,
+    '/notifications': 1,
+    '/events': 2,
+    '/profile': 3,
+  };
 
   @override
   Widget build(BuildContext context) {
     final location = GoRouterState.of(context).uri.toString();
     final currentIndex = navIndexMap[location] ?? -1;
-    double gap = 10;
+
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+
+    double gap = 0;
     int badge = 0;
-    final padding = EdgeInsets.symmetric(horizontal: 18, vertical: 12);
+    final double iconSize = 22;
+    final padding = const EdgeInsets.symmetric(horizontal: 8, vertical: 12);
 
     return Scaffold(
       body: child,
       bottomNavigationBar: SafeArea(
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
           decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(100)),
-            boxShadow: [
-              BoxShadow(
-                spreadRadius: -10,
-                blurRadius: 60,
-                color: Colors.black.withValues(alpha: 0.4),
-                offset: Offset(0, 25),
-              ),
-            ],
+            color: isDark ? Colors.grey[900] : Colors.white,
+            borderRadius: BorderRadius.circular(100),
+            boxShadow:
+                isDark
+                    ? []
+                    : [
+                      BoxShadow(
+                        spreadRadius: -10,
+                        blurRadius: 60,
+                        color: Colors.black.withOpacity(0.2),
+                        offset: const Offset(0, 25),
+                      ),
+                    ],
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 3.0, vertical: 3),
             child: GNav(
-              tabs: [
-                GButton(
-                  gap: gap,
-                  iconActiveColor: Colors.purple,
-                  iconColor: Colors.black,
-                  textColor: Colors.purple,
-                  backgroundColor: Colors.purple.withValues(alpha: 0.2),
-                  iconSize: 24,
-                  padding: padding,
-                  icon: Icons.home,
-                  text: 'Trang chủ',
-                ),
-                GButton(
-                  gap: gap,
-                  iconActiveColor: Colors.teal,
-                  iconColor: Colors.black,
-                  textColor: Colors.teal,
-                  backgroundColor: Colors.teal.withValues(alpha: 0.2),
-                  iconSize: 24,
-                  padding: padding,
-                  icon: Icons.verified_user,
-                  leading: CircleAvatar(
-                    radius: 12,
-                    backgroundImage: AssetImage('assets/images/logo_sdc.png'),
-                  ),
-                  text: 'Tài khoản',
-                ),
-              ],
+              tabBorderRadius: 100,
+              color: isDark ? Colors.grey[400] : Colors.black,
+              activeColor: Colors.white,
+              tabBackgroundColor:
+                  isDark ? Colors.white10 : Colors.grey.shade200,
+              backgroundColor: Colors.transparent,
+              padding: padding,
+              gap: gap,
+              iconSize: iconSize,
               selectedIndex: currentIndex,
               onTabChange: (index) {
                 final route = tabs[index];
                 context.go(route);
               },
+              tabs: [
+                GButton(
+                  icon: Icons.home,
+                  text: 'Trang chủ',
+                  iconColor: isDark ? Colors.grey[400] : Colors.black,
+                  iconActiveColor: Colors.purple,
+                  textColor: Colors.purple,
+                  backgroundColor: Colors.purple.withOpacity(0.2),
+                  textStyle: const TextStyle(
+                    fontStyle: FontStyle.italic,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 13,
+                  ),
+                ),
+                GButton(
+                  icon: Icons.notifications,
+                  text: 'Thông báo',
+                  iconColor: isDark ? Colors.grey[400] : Colors.black,
+                  iconActiveColor: Colors.amber,
+                  textColor: Colors.amber,
+                  backgroundColor: Colors.amber.withOpacity(0.2),
+                  textStyle: const TextStyle(
+                    fontStyle: FontStyle.italic,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 13,
+                  ),
+                ),
+                GButton(
+                  icon: Icons.event_note,
+                  text: 'Sự kiện',
+                  iconColor: isDark ? Colors.grey[400] : Colors.black,
+                  iconActiveColor: Colors.orange,
+                  textColor: Colors.orange,
+                  backgroundColor: Colors.orange.withOpacity(0.2),
+                  textStyle: const TextStyle(
+                    fontStyle: FontStyle.italic,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 13,
+                  ),
+                ),
+                GButton(
+                  icon: Icons.verified_user,
+                  text: 'Giới thiệu',
+                  iconColor: isDark ? Colors.grey[400] : Colors.black,
+                  iconActiveColor: Colors.teal,
+                  textColor: Colors.teal,
+                  backgroundColor: Colors.teal.withOpacity(0.2),
+                  textStyle: const TextStyle(
+                    fontStyle: FontStyle.italic,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 13,
+                  ),
+                  leading: const CircleAvatar(
+                    radius: 12,
+                    backgroundImage: AssetImage('assets/images/logo_sdc.png'),
+                  ),
+                ),
+              ],
             ),
           ),
         ),
