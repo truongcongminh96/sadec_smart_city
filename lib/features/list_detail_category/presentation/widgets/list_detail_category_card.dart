@@ -172,7 +172,10 @@ class _ListDetailCategoryCardState extends State<ListDetailCategoryCard>
                                 SizedBox(width: 6),
                                 Text(
                                   "Xem chi tiết",
-                                  style: TextStyle(fontWeight: FontWeight.w500),
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black87,
+                                  ),
                                 ),
                               ],
                             ),
@@ -220,7 +223,7 @@ class _ListDetailCategoryCardState extends State<ListDetailCategoryCard>
                                 SizedBox(width: 6),
                                 Text(
                                   "Bản đồ",
-                                  style: TextStyle(fontWeight: FontWeight.w500),
+                                  style: TextStyle(fontWeight: FontWeight.w500, color: Colors.black87),
                                 ),
                               ],
                             ),

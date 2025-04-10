@@ -59,9 +59,22 @@ class _HomeView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text("Công dân số", style: titleStyle),
-                  Text(
-                    "Xem tất cả",
-                    style: TextStyle(color: Colors.grey.shade600),
+                  Builder(
+                    builder: (context) {
+                      final hour = DateTime.now().hour;
+                      final greeting =
+                          (hour >= 5 && hour < 18)
+                              ? 'Chào buổi sáng 🌞'
+                              : 'Chào buổi tối 🌙';
+                      return Text(
+                        greeting,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14,
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),

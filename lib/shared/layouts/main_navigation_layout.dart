@@ -19,7 +19,6 @@ class MainNavigationLayout extends StatelessWidget {
     int badge = 0;
     final padding = EdgeInsets.symmetric(horizontal: 18, vertical: 12);
 
-    print(currentIndex);
     return Scaffold(
       body: child,
       bottomNavigationBar: SafeArea(
