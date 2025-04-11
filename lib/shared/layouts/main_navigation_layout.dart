@@ -44,7 +44,7 @@ class MainNavigationLayout extends StatelessWidget {
                       BoxShadow(
                         spreadRadius: -10,
                         blurRadius: 60,
-                        color: Colors.black.withOpacity(0.2),
+                        color: Colors.black.withValues(alpha: 0.2),
                         offset: const Offset(0, 25),
                       ),
                     ],
@@ -73,7 +73,7 @@ class MainNavigationLayout extends StatelessWidget {
                   iconColor: isDark ? Colors.grey[400] : Colors.black,
                   iconActiveColor: Colors.purple,
                   textColor: Colors.purple,
-                  backgroundColor: Colors.purple.withOpacity(0.2),
+                  backgroundColor: Colors.purple.withValues(alpha: 0.2),
                   textStyle: const TextStyle(
                     fontStyle: FontStyle.italic,
                     fontWeight: FontWeight.w400,
@@ -86,7 +86,7 @@ class MainNavigationLayout extends StatelessWidget {
                   iconColor: isDark ? Colors.grey[400] : Colors.black,
                   iconActiveColor: Colors.amber,
                   textColor: Colors.amber,
-                  backgroundColor: Colors.amber.withOpacity(0.2),
+                  backgroundColor: Colors.amber.withValues(alpha: 0.2),
                   textStyle: const TextStyle(
                     fontStyle: FontStyle.italic,
                     fontWeight: FontWeight.w400,
@@ -99,7 +99,7 @@ class MainNavigationLayout extends StatelessWidget {
                   iconColor: isDark ? Colors.grey[400] : Colors.black,
                   iconActiveColor: Colors.orange,
                   textColor: Colors.orange,
-                  backgroundColor: Colors.orange.withOpacity(0.2),
+                  backgroundColor: Colors.orange.withValues(alpha: 0.2),
                   textStyle: const TextStyle(
                     fontStyle: FontStyle.italic,
                     fontWeight: FontWeight.w400,
@@ -112,7 +112,7 @@ class MainNavigationLayout extends StatelessWidget {
                   iconColor: isDark ? Colors.grey[400] : Colors.black,
                   iconActiveColor: Colors.teal,
                   textColor: Colors.teal,
-                  backgroundColor: Colors.teal.withOpacity(0.2),
+                  backgroundColor: Colors.teal.withValues(alpha: 0.2),
                   textStyle: const TextStyle(
                     fontStyle: FontStyle.italic,
                     fontWeight: FontWeight.w400,

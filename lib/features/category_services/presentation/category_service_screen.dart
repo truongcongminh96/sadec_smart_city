@@ -61,9 +61,6 @@ class _CategoryServiceView extends StatelessWidget {
                     CategoryServiceGrid(
                       services: mainItems,
                       crossAxisCount: crossAxisCount,
-                      onTap: (item) {
-                        // handle tap here
-                      },
                     ),
                     const SizedBox(height: 24),
                     for (final hasSubmenuItem in hasSubmenuItems)

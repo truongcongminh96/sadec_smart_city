@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:sadec_smart_city/shared/utils/sanitize_html.dart';
 
 class DetailInformationTabContent extends StatelessWidget {
   const DetailInformationTabContent({
@@ -30,7 +31,9 @@ class DetailInformationTabContent extends StatelessWidget {
                 SingleChildScrollView(
                   padding: EdgeInsets.only(top: 16),
                   child: Html(
-                    data: gioiThieu ?? '<p>Chưa có nội dung giới thiệu.</p>',
+                    data: sanitizeHtml(
+                      gioiThieu ?? '<p>Chưa có nội dung giới thiệu.</p>',
+                    ),
                     style: {
                       "body": Style(
                         color: colorScheme.onSurface,

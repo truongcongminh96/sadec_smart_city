@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:sadec_smart_city/features/home/data/models/menu_item_model.dart';
 import 'package:sadec_smart_city/shared/screens/webview_screen.dart';
@@ -12,6 +13,7 @@ class CitizenServicesGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
+    final AutoSizeGroup titleGroup = AutoSizeGroup();
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -34,7 +36,7 @@ class CitizenServicesGrid extends StatelessWidget {
         itemCount: items.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 4,
-          mainAxisSpacing: 16,
+          mainAxisSpacing: 5,
           crossAxisSpacing: 16,
           mainAxisExtent: 100,
         ),
@@ -74,15 +76,19 @@ class CitizenServicesGrid extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 6),
-                Text(
-                  item.ten,
-                  style: theme.textTheme.bodySmall?.copyWith(
-                    fontSize: 12,
-                    color: isDark ? Colors.white : Colors.black87,
+                Expanded(
+                  child: AutoSizeText(
+                    group: titleGroup,
+                    item.ten,
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      fontSize: 12,
+                      color: isDark ? Colors.white : Colors.black87,
+                    ),
+                    textAlign: TextAlign.center,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    minFontSize: 10,
                   ),
-                  textAlign: TextAlign.center,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
                 ),
               ],
             ),

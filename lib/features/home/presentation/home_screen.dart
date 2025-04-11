@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:sadec_smart_city/features/home/logic/home_cubit.dart';
 import 'package:sadec_smart_city/features/home/presentation/widgets/citizen_services_grid.dart';
 import 'package:sadec_smart_city/features/home/presentation/widgets/slider_banner.dart';
@@ -58,7 +59,13 @@ class _HomeView extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Công dân số", style: titleStyle),
+                  Text(
+                    DateFormat(
+                      'EEEE, dd/MM/yyyy',
+                      'vi_VN',
+                    ).format(DateTime.now()),
+                    style: titleStyle,
+                  ),
                   Builder(
                     builder: (context) {
                       final hour = DateTime.now().hour;

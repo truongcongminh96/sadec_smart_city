@@ -4,11 +4,15 @@ import 'package:sadec_smart_city/shared/widgets/fancy_bottom_navigation/componen
 import 'package:sadec_smart_city/shared/widgets/fancy_bottom_navigation/component/gnav.dart';
 
 class FancyBottomNavigationExample extends StatefulWidget {
+  const FancyBottomNavigationExample({super.key});
+
   @override
-  _FancyBottomNavigationExampleState createState() => _FancyBottomNavigationExampleState();
+  FancyBottomNavigationExampleState createState() =>
+      FancyBottomNavigationExampleState();
 }
 
-class _FancyBottomNavigationExampleState extends State<FancyBottomNavigationExample> {
+class FancyBottomNavigationExampleState
+    extends State<FancyBottomNavigationExample> {
   int selectedIndex = 0;
   int badge = 0;
   final padding = EdgeInsets.symmetric(horizontal: 18, vertical: 12);
@@ -20,7 +24,7 @@ class _FancyBottomNavigationExampleState extends State<FancyBottomNavigationExam
     Colors.purple,
     Colors.pink,
     Colors.amber[600]!,
-    Colors.teal
+    Colors.teal,
   ];
 
   @override
@@ -34,11 +38,9 @@ class _FancyBottomNavigationExampleState extends State<FancyBottomNavigationExam
       home: Scaffold(
         extendBody: true,
         appBar: AppBar(
-          title: Text(
-            'GoogleNavBar',
-            style: TextStyle(color: Colors.black),
-          ),
-          backgroundColor: Colors.white, systemOverlayStyle: SystemUiOverlayStyle.dark,
+          title: Text('GoogleNavBar', style: TextStyle(color: Colors.black)),
+          backgroundColor: Colors.white,
+          systemOverlayStyle: SystemUiOverlayStyle.dark,
         ),
 
         bottomNavigationBar: SafeArea(
@@ -51,9 +53,9 @@ class _FancyBottomNavigationExampleState extends State<FancyBottomNavigationExam
                 BoxShadow(
                   spreadRadius: -10,
                   blurRadius: 60,
-                  color: Colors.black.withOpacity(.4),
+                  color: Colors.black.withValues(alpha: 0.4),
                   offset: Offset(0, 25),
-                )
+                ),
               ],
             ),
             child: Padding(
@@ -65,7 +67,7 @@ class _FancyBottomNavigationExampleState extends State<FancyBottomNavigationExam
                     iconActiveColor: Colors.purple,
                     iconColor: Colors.black,
                     textColor: Colors.purple,
-                    backgroundColor: Colors.purple.withOpacity(.2),
+                    backgroundColor: Colors.purple.withValues(alpha: 0.2),
                     iconSize: 24,
                     padding: padding,
                     icon: Icons.home,
@@ -76,28 +78,30 @@ class _FancyBottomNavigationExampleState extends State<FancyBottomNavigationExam
                     iconActiveColor: Colors.pink,
                     iconColor: Colors.black,
                     textColor: Colors.pink,
-                    backgroundColor: Colors.pink.withOpacity(.2),
+                    backgroundColor: Colors.pink.withValues(alpha: 0.2),
                     iconSize: 24,
                     padding: padding,
                     icon: Icons.favorite,
                     text: 'Tan vỡ',
-                    leading: selectedIndex == 1 || badge == 0
-                        ? null
-                        : Badge(
-                      child: Icon(
-                        Icons.heart_broken,
-                        color: selectedIndex == 1
-                            ? Colors.pink
-                            : Colors.black,
-                      ),
-                    ),
+                    leading:
+                        selectedIndex == 1 || badge == 0
+                            ? null
+                            : Badge(
+                              child: Icon(
+                                Icons.heart_broken,
+                                color:
+                                    selectedIndex == 1
+                                        ? Colors.pink
+                                        : Colors.black,
+                              ),
+                            ),
                   ),
                   GButton(
                     gap: gap,
                     iconActiveColor: Colors.amber[600],
                     iconColor: Colors.black,
                     textColor: Colors.amber[600],
-                    backgroundColor: Colors.amber[600]!.withOpacity(.2),
+                    backgroundColor: Colors.amber[600]!.withValues(alpha: 0.2),
                     iconSize: 24,
                     padding: padding,
                     icon: Icons.search,
@@ -108,16 +112,16 @@ class _FancyBottomNavigationExampleState extends State<FancyBottomNavigationExam
                     iconActiveColor: Colors.teal,
                     iconColor: Colors.black,
                     textColor: Colors.teal,
-                    backgroundColor: Colors.teal.withOpacity(.2),
+                    backgroundColor: Colors.teal.withValues(alpha: 0.2),
                     iconSize: 24,
                     padding: padding,
                     icon: Icons.verified_user,
                     leading: CircleAvatar(
                       radius: 12,
-                      backgroundImage:AssetImage('assets/images/logo_sdc.png'),
+                      backgroundImage: AssetImage('assets/images/logo_sdc.png'),
                     ),
                     text: 'Sheldon',
-                  )
+                  ),
                 ],
                 selectedIndex: selectedIndex,
                 onTabChange: (index) {

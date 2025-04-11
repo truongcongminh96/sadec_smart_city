@@ -6,13 +6,10 @@ class CategoryServiceGrid extends StatelessWidget {
   final List<CategoryServiceModel> services;
   final int crossAxisCount;
 
-  final void Function(CategoryServiceModel item)? onTap;
-
   const CategoryServiceGrid({
     super.key,
     required this.services,
     required this.crossAxisCount,
-    this.onTap,
   });
 
   static final _gradients = [

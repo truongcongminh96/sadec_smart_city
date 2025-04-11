@@ -20,6 +20,10 @@ class ListDetailCategoryAppBar extends StatelessWidget {
             prefixIcon: const Icon(Icons.search),
             filled: true,
             fillColor: Colors.white,
+            hintStyle: TextStyle(
+              color: Colors.pinkAccent,
+              fontStyle: FontStyle.italic,
+            ),
             contentPadding: const EdgeInsets.symmetric(horizontal: 20),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20),
